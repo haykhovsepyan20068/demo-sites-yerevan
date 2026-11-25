@@ -1,26 +1,8 @@
-# Demo websites for businesses in Yerevan
+# Demo websites
 
 **Demo versions. These are not the official websites of the companies.** Any changes must be agreed with the client.
 
 Static websites (HTML, CSS, JavaScript, no build step). Two languages: English and Armenian (EN / ՀԱՅ).
-
-## Sites
-
-| Folder | Company |
-|---|---|
-| `boom-party/` | Boom Party (reference design) |
-| `lians/` | Lians |
-| `holi/` | Holi |
-| `yek-beauty-hub/` | Yek Beauty Hub |
-| `bedding-shop-am/` | Bedding Shop.am |
-| `ruben-store-showroom/` | Ruben Store Showroom |
-| `xachi-garadzh/` | Xachi Garadzh |
-| `vha-boutique/` | Vha Boutique |
-| `ashna/` | Ashna |
-| `luska-salon/` | Luska Salon |
-| `karolli/` | Karolli |
-| `moxrotik/` | Moxrotik |
-| `jasis-rose/` | Jasi's Rose |
 
 ## Structure of every site
 
