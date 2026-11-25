@@ -18,7 +18,6 @@
       open_now: "Open now", closed_now: "Closed now",
       follow: "Follow us", website: "Website", since: "Since",
       rating: "rating", ratings: "ratings", on: "on", rating_title: "Customer rating",
-      foot: "Information is taken from public sources and may change. Please call to confirm.",
       demo: "Demo version. This is not the official website of {name}. Any changes must be agreed with the client."
     },
     hy: {
@@ -30,7 +29,6 @@
       open_now: "Բաց է հիմա", closed_now: "Փակ է հիմա",
       follow: "Հետևեք մեզ", website: "Կայք", since: "Սկսած",
       rating: "գնահատական", ratings: "գնահատական", on: "", rating_title: "Հաճախորդների գնահատական",
-      foot: "Տեղեկությունները վերցված են բաց աղբյուրներից և կարող են փոխվել: Խնդրում ենք զանգահարել ճշտելու համար:",
       demo: "Դեմո տարբերակ: Սա {name}-ի պաշտոնական կայքը չէ: Բոլոր փոփոխությունները պետք է համաձայնեցվեն պատվիրատուի հետ:"
     }
   };
@@ -225,7 +223,6 @@
 
     // footer
     $("footName").textContent = "© " + new Date().getFullYear() + " " + name;
-    $("footNote").textContent = ui("foot");
     $("footDemo").textContent = ui("demo").replace("{name}", name);
 
     // кнопки языка
