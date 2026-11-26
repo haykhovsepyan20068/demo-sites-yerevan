@@ -27,7 +27,12 @@
       lblAddress: "Address", lblPhone: "Phone", lblContact: "Contact", lblHours: "Hours",
       address: "Mazmanyan Street 1/1, Yerevan, Armenia",
       hours: "Open until 22:00",
-      yandex: "Find us on Yandex Maps",
+      benchAria: "Workbench: car pattern, tailoring and mechanic's tools",
+      benchHint: "Point at a tool, or tap it.",
+      toolPattern: "Pattern: your car", toolShears: "Tailor's shears", toolSpool: "Thread spool",
+      toolChalk: "Tailor's chalk", toolCurve: "French curve", toolHardware: "Nuts and bolt",
+      toolDriver: "Screwdriver", toolWrench: "Combination wrench", toolTape: "Tape measure",
+      demo: "This is a demo website.",
       footTag: "Garage Atelier. Car service and auto repair in Yerevan.",
       footRights: "All rights reserved.",
       ariaCall: "Call +374 96 700025", ariaMenu: "Open menu", ariaMenuClose: "Close menu",
@@ -58,7 +63,12 @@
       lblAddress: "Հասցե", lblPhone: "Հեռախոս", lblContact: "Կոնտակտ", lblHours: "Աշխատանքային ժամեր",
       address: "Երևան, Մազմանյան փողոց 1/1, Հայաստան",
       hours: "Բաց է մինչև 22:00",
-      yandex: "Գտեք մեզ Yandex Քարտեզներում",
+      benchAria: "Աշխատասեղան՝ մեքենայի լեկալ, դերձակի և մեխանիկի գործիքներ",
+      benchHint: "Մատնացույց արեք գործիքը կամ հպեք դրան։",
+      toolPattern: "Լեկալ՝ ձեր մեքենան", toolShears: "Դերձակի մկրատ", toolSpool: "Թելի կոճ",
+      toolChalk: "Դերձակի կավիճ", toolCurve: "Կոր քանոն", toolHardware: "Մանեկներ և հեղույս",
+      toolDriver: "Պտուտակահան", toolWrench: "Պտուտակաբանալի", toolTape: "Սանտիմետր",
+      demo: "Սա դեմո կայք է։",
       footTag: "Garage Atelier. Ավտոսպասարկում և ավտովերանորոգում Երևանում։",
       footRights: "Բոլոր իրավունքները պաշտպանված են։",
       ariaCall: "Զանգահարել +374 96 700025", ariaMenu: "Բացել ընտրացանկը", ariaMenuClose: "Փակել ընտրացանկը",
@@ -102,12 +112,84 @@
     document.querySelectorAll(".lang button").forEach(function (b) {
       b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === lang));
     });
+    document.querySelectorAll(".tool[data-tool]").forEach(function (el) {
+      var k = el.getAttribute("data-tool");
+      if (dict[k]) el.setAttribute("aria-label", dict[k]);
+    });
+    if (typeof syncLabel === "function") syncLabel();
     store(false, lang);
   }
+  var syncLabel = null;
 
   document.querySelectorAll(".lang button").forEach(function (b) {
     b.addEventListener("click", function () { setLang(b.getAttribute("data-lang")); });
   });
+  // Workbench: hover / focus / tap lights a tool; pointer tilts the sheet.
+  (function () {
+    var bench = document.querySelector(".bench");
+    var fig = document.querySelector(".sheet");
+    var label = document.getElementById("benchLabel");
+    if (!bench) return;
+    var tools = Array.prototype.slice.call(bench.querySelectorAll(".tool"));
+    var lit = null, hovered = null, lastType = "mouse";
+    function dict() { return T[document.documentElement.lang === "hy" ? "hy" : "en"]; }
+    syncLabel = function () {
+      if (!label) return;
+      var t = lit || hovered;
+      var d = dict();
+      label.textContent = t ? d[t.getAttribute("data-tool")] : d.svgPattern;
+    };
+    function setLit(t) {
+      lit = t;
+      tools.forEach(function (x) {
+        var on = x === t;
+        x.classList.toggle("is-lit", on);
+        x.setAttribute("aria-pressed", String(on));
+      });
+      bench.classList.toggle("has-lit", !!t);
+      syncLabel();
+    }
+    tools.forEach(function (t) {
+      t.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") { hovered = t; syncLabel(); } });
+      t.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") { hovered = null; syncLabel(); } });
+      t.addEventListener("pointerdown", function (e) { lastType = e.pointerType; });
+      t.addEventListener("click", function (e) {
+        e.stopPropagation();
+        setLit(lit === t && lastType !== "mouse" ? null : t);
+        lastType = "mouse";
+      });
+      t.addEventListener("focus", function () { hovered = t; syncLabel(); });
+      t.addEventListener("blur", function () { if (hovered === t) hovered = null; if (lit === t) setLit(null); else syncLabel(); });
+      t.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setLit(lit === t ? null : t); }
+        if (e.key === "Escape") setLit(null);
+      });
+    });
+    document.addEventListener("click", function () { if (lit) setLit(null); });
+    syncLabel();
+
+    var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (fig && !still && window.matchMedia("(hover: hover)").matches) {
+      var raf = 0;
+      fig.addEventListener("pointermove", function (e) {
+        var r = fig.getBoundingClientRect();
+        var x = ((e.clientX - r.left) / r.width) * 2 - 1, y = ((e.clientY - r.top) / r.height) * 2 - 1;
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(function () {
+          fig.classList.add("is-tracking");
+          fig.style.setProperty("--rx", x.toFixed(3));
+          fig.style.setProperty("--ry", y.toFixed(3));
+        });
+      });
+      fig.addEventListener("pointerleave", function () {
+        cancelAnimationFrame(raf);
+        fig.classList.remove("is-tracking");
+        fig.style.setProperty("--rx", "0");
+        fig.style.setProperty("--ry", "0");
+      });
+    }
+  })();
+
   setLang(store(true) || "en");
 
   // Mobile / tablet menu

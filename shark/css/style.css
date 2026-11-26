@@ -135,37 +135,53 @@ html[lang="hy"] .btn { font-stretch: 85%; letter-spacing: 0; }
   font-size: .78rem; font-weight: 600; letter-spacing: .14em; color: var(--steel);
 }
 
-.hero__stage { grid-column: 1 / -1; align-self: center; position: relative; }
-.mark {
-  position: relative;
-  font-size: clamp(7rem, min(33vw, 40svh), 30rem);
-  line-height: .78;
-  text-align: center;
-  margin: .04em auto 0;
-  width: fit-content;
+.hero__stage { grid-column: 1 / -1; align-self: center; position: relative; display: flex; justify-content: center; }
+
+/* Hero scene: SHARK half under water, a loaded barbell and a dumbbell on the platform, a fin cutting through */
+.scene { width: 100%; max-width: 1200px; height: auto; max-height: 58svh; overflow: visible; touch-action: manipulation; }
+.scene .layer { transition: transform .5s cubic-bezier(.2, .7, .2, 1); }
+.scene__grid path { stroke: rgba(127, 151, 166, .12); stroke-width: 1; stroke-dasharray: 2 10; fill: none; }
+.scene__word text {
+  font-family: var(--display); font-stretch: 62%; font-weight: 900; font-size: 420px;
+  fill: var(--bone);
 }
-.mark__word {
-  display: block; font-weight: 900; letter-spacing: -.02em;
-  /* waterline at 62%: above — bone, below — submerged steel */
-  background: linear-gradient(180deg, var(--bone) 0 62%, rgba(127, 151, 166, .28) 62% 100%);
-  -webkit-background-clip: text; background-clip: text;
-  color: transparent;
-  padding-top: .02em;
+.scene__water { pointer-events: none; }
+.wake { fill: none; stroke: var(--bone); stroke-width: 2.5; opacity: .6; stroke-dasharray: 7000; stroke-dashoffset: 0; }
+.scene__ripple { fill: none; stroke: rgba(127, 151, 166, .45); stroke-width: 2; stroke-linecap: round; }
+.scene__floor { fill: #08161F; }
+.scene__floor-line { stroke: var(--orange); stroke-width: 3; }
+
+.part { cursor: pointer; outline: none; }
+.part > *, .fin__body { transition: fill .35s ease, stroke .35s ease, filter .35s ease; }
+
+.fin__body { fill: url(#sc-fin); }
+.fin__edge { fill: none; stroke: var(--bone); stroke-width: 3; stroke-linecap: round; opacity: .75; transition: stroke .35s, opacity .35s; }
+.fin__scar { fill: none; stroke: rgba(238, 232, 220, .35); stroke-width: 3; stroke-linecap: round; }
+.fin__foam { fill: none; stroke: var(--bone); stroke-width: 3; stroke-linecap: round; opacity: .8; }
+
+.bar__shaft { fill: url(#sc-steel); }
+.bar__shine { fill: rgba(255, 255, 255, .55); }
+.bar__sleeve { fill: url(#sc-steel); }
+.bar__collar { fill: #5E7684; stroke: #0B1D28; stroke-width: 2; }
+.plate { fill: url(#sc-plate); stroke: #7F97A6; stroke-width: 2.5; transition: fill .35s ease, stroke .35s ease, filter .35s ease; }
+.plate--m { stroke: var(--orange); }
+.plate--hex { stroke: var(--bone); }
+.plate__rim { fill: none; stroke: rgba(238, 232, 220, .22); stroke-width: 2; transition: stroke .35s; }
+
+/* Lit state: hover, keyboard focus, or tap (.is-lit) — plates and fin burn orange */
+.part:hover .plate, .part:focus-visible .plate, .part.is-lit .plate {
+  fill: var(--orange); stroke: var(--orange-hot);
+  filter: drop-shadow(0 0 10px rgba(255, 91, 31, .9)) drop-shadow(0 0 26px rgba(255, 91, 31, .55));
 }
-.fin {
-  position: absolute; bottom: 38%; right: 4%;
-  height: .48em; width: auto; overflow: visible;
+.part:hover .plate__rim, .part:focus-visible .plate__rim, .part.is-lit .plate__rim { stroke: rgba(11, 29, 40, .45); }
+.part--bar .plate--l { transition-delay: .06s; }
+.part--bar .plate--m { transition-delay: .12s; }
+.part--fin:hover .fin__body, .part--fin:focus-visible .fin__body, .part--fin.is-lit .fin__body {
   fill: var(--orange);
-  filter: drop-shadow(-.04em 0 0 var(--petrol));
-  transform-origin: 50% 100%;
+  filter: drop-shadow(0 0 14px rgba(255, 91, 31, .95)) drop-shadow(0 0 36px rgba(255, 91, 31, .5));
 }
-.wake {
-  position: absolute; left: calc(50% - 50vw); bottom: calc(38% - .045em);
-  width: 100vw; height: .09em;
-  fill: none; stroke: var(--bone); stroke-width: 2; vector-effect: non-scaling-stroke;
-  opacity: .55;
-  stroke-dasharray: 1200; stroke-dashoffset: 0;
-}
+.part--fin:hover .fin__edge, .part--fin:focus-visible .fin__edge, .part--fin.is-lit .fin__edge { stroke: #FFD2BC; opacity: 1; }
+.part:focus-visible .bar__shaft, .part:focus-visible .fin__foam { stroke: var(--bone); stroke-width: 2; stroke-dasharray: 6 5; }
 
 .hero__copy { grid-column: 1; align-self: end; max-width: 40rem; }
 .hero__title {
@@ -182,16 +198,17 @@ html[lang="hy"] .btn { font-stretch: 85%; letter-spacing: 0; }
 
 /* Signature motion: the fin cuts in along the waterline, leaving a wake */
 @media (prefers-reduced-motion: no-preference) {
-  .js .fin { animation: fin-in 1.7s cubic-bezier(.2, .7, .15, 1) .25s both; }
+  .js .fin-swim { animation: fin-in 1.7s cubic-bezier(.2, .7, .15, 1) .25s both, fin-bob 5s ease-in-out 2.2s infinite; }
   .js .wake { animation: wake-draw 1.9s cubic-bezier(.3, .6, .2, 1) .2s both; }
   .js .hero__copy, .js .hero__facts { animation: rise .6s ease-out both; }
 }
 @keyframes fin-in {
-  0%   { transform: translateX(-130vw) rotate(-4deg); }
-  70%  { transform: translateX(1.5%) rotate(1deg); }
-  100% { transform: translateX(0) rotate(0); }
+  0%   { transform: translateX(-900px); }
+  70%  { transform: translateX(14px); }
+  100% { transform: translateX(0); }
 }
-@keyframes wake-draw { from { stroke-dashoffset: 1200; } to { stroke-dashoffset: 0; } }
+@keyframes fin-bob { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(10px, 4px); } }
+@keyframes wake-draw { from { stroke-dashoffset: 7000; } to { stroke-dashoffset: 0; } }
 /* text is never hidden: only a small slide, no opacity change, no delay */
 @keyframes rise { from { transform: translateY(10px); } to { transform: none; } }
 
@@ -255,7 +272,11 @@ html[lang="hy"] .btn { font-stretch: 85%; letter-spacing: 0; }
 .stat--hours { grid-column: span 5; background: var(--trench); }
 .stat--hours .stat__big { color: var(--bone); -webkit-text-stroke: 0; }
 .stat--place { grid-column: span 7; justify-content: flex-end; background: var(--deep); }
-.stat__fin { width: 120px; fill: var(--orange); margin-bottom: auto; }
+.stat__fin { width: 120px; fill: var(--orange); margin-bottom: auto; overflow: visible; }
+.stat__fin-body { transition: transform .4s cubic-bezier(.2, .7, .2, 1), filter .35s; transform-box: fill-box; transform-origin: 50% 100%; }
+.stat__fin-wave { fill: none; stroke: var(--bone); stroke-width: 3; opacity: .5; }
+.stat--coach:hover .stat__fin-body { filter: drop-shadow(0 0 12px rgba(255, 91, 31, .85)); transform: translateY(-8px); }
+.foot__demo { max-width: var(--max); margin: 18px auto 0; padding-top: 14px; border-top: 1px solid var(--line); color: var(--bone); font-size: .92rem; font-weight: 600; }
 .stat__pin { width: 40px; fill: var(--bone); margin-bottom: auto; }
 
 /* Band */
@@ -303,6 +324,7 @@ html[lang="hy"] .band__text { max-width: 20ch; }
   html[lang="hy"] .nav { gap: 12px; }
   html[lang="hy"] .nav a { font-size: .86rem; }
   .hide-s { display: none; }
+  .hero__side { display: none; }
   .about { grid-template-columns: 1fr; }
   .about__num { font-size: clamp(6rem, 28vw, 12rem); }
   .row { grid-template-columns: 1fr; gap: 10px; }
@@ -337,7 +359,7 @@ html[lang="hy"] .band__text { max-width: 20ch; }
 
   .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 28px; }
   .hero__side { display: none; }
-  .mark { font-size: 33vw; }
+  .scene { max-height: none; }
   .hero__facts { grid-column: 1; grid-template-columns: 1fr 1fr; text-align: left; padding-right: 0; }
   .hero__actions .btn { flex: 1 1 100%; }
 

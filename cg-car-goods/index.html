@@ -76,7 +76,7 @@
           <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
           <span data-i18n="ctas.call">Call +374 98 828200</span>
         </a>
-        <a class="btn btn--route" href="https://www.google.com/maps/search/?api=1&amp;query=Mazmanyan+Street+1%2C+Yerevan%2C+Armenia" target="_blank" rel="noopener">
+        <a class="btn btn--route" href="https://yandex.com/maps/?text=Mazmanyan%20Street%201%2C%20Yerevan%2C%20Armenia" target="_blank" rel="noopener">
           <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
           <span data-i18n="ctas.directions">Get directions</span>
         </a>
@@ -84,53 +84,244 @@
       <p class="hero__hours"><span class="dot" aria-hidden="true"></span><span data-i18n="contact.hours">Open until 22:00</span></p>
     </div>
 
-    <div class="rack-wrap" aria-hidden="true">
-      <div class="rack">
-        <div class="rack__post rack__post--l"></div>
-        <div class="rack__post rack__post--r"></div>
+    <div class="rack-wrap" id="rack">
+      <svg class="rack-svg" viewBox="0 0 600 540" role="group" aria-labelledby="rack-title" focusable="false">
+        <title id="rack-title" data-i18n="ui.rackTitle">Store shelf: point at a product to see its section</title>
+        <defs>
+          <pattern id="peg" width="18" height="18" patternUnits="userSpaceOnUse">
+            <rect width="18" height="18" fill="#CBD2D8"/>
+            <circle cx="9" cy="9" r="2" fill="#A3ADB7"/>
+            <circle cx="9" cy="9.6" r="1.3" fill="#8C97A3"/>
+          </pattern>
+          <pattern id="slots" width="22" height="16" patternUnits="userSpaceOnUse">
+            <rect x="8" y="4" width="6" height="8" rx="1" fill="#153B6D"/>
+          </pattern>
+          <pattern id="hazard" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <rect width="24" height="24" fill="#F4CB2F"/><rect width="12" height="24" fill="#18212C"/>
+          </pattern>
+          <linearGradient id="deck" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#C3CBD2"/><stop offset="1" stop-color="#8C97A3"/>
+          </linearGradient>
+          <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+          </linearGradient>
 
-        <div class="shelf">
-          <div class="stock">
-            <svg class="item item--spray" viewBox="0 0 40 90"><path d="M14 10h10v6h6l4-4v-6H14z" fill="#18212C"/><rect x="10" y="18" width="20" height="8" rx="2" fill="#2E3A48"/><path d="M8 28h24l2 6v52a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V34z" fill="#1D4F91"/><rect x="10" y="48" width="20" height="22" fill="#fff"/><rect x="13" y="53" width="14" height="3" fill="#E5631B"/><rect x="13" y="59" width="10" height="2" fill="#18212C"/></svg>
-            <svg class="item item--spray" viewBox="0 0 40 90"><path d="M14 10h10v6h6l4-4v-6H14z" fill="#18212C"/><rect x="10" y="18" width="20" height="8" rx="2" fill="#2E3A48"/><path d="M8 28h24l2 6v52a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V34z" fill="#1D4F91"/><rect x="10" y="48" width="20" height="22" fill="#fff"/><rect x="13" y="53" width="14" height="3" fill="#E5631B"/><rect x="13" y="59" width="10" height="2" fill="#18212C"/></svg>
-            <svg class="item item--can" viewBox="0 0 70 90"><rect x="44" y="4" width="14" height="10" rx="2" fill="#18212C"/><path d="M6 20h52a6 6 0 0 1 6 6v58a6 6 0 0 1-6 6H6z" fill="#F4CB2F"/><path d="M6 20 22 6h18l-6 14z" fill="#E1B520"/><rect x="14" y="40" width="40" height="30" fill="#18212C"/><rect x="20" y="48" width="28" height="4" fill="#F4CB2F"/><rect x="20" y="57" width="18" height="3" fill="#fff"/></svg>
-          </div>
-          <div class="stock">
-            <svg class="item item--bottle" viewBox="0 0 40 90"><rect x="14" y="4" width="12" height="10" fill="#E5631B"/><path d="M12 14h16v8l6 8v54a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V30l6-8z" fill="#fff" stroke="#18212C" stroke-width="2"/><rect x="9" y="46" width="22" height="24" fill="#E5631B"/><rect x="12" y="52" width="16" height="3" fill="#fff"/></svg>
-            <svg class="item item--bottle" viewBox="0 0 40 90"><rect x="14" y="4" width="12" height="10" fill="#E5631B"/><path d="M12 14h16v8l6 8v54a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V30l6-8z" fill="#fff" stroke="#18212C" stroke-width="2"/><rect x="9" y="46" width="22" height="24" fill="#E5631B"/><rect x="12" y="52" width="16" height="3" fill="#fff"/></svg>
-            <svg class="item item--jar" viewBox="0 0 60 60"><rect x="8" y="4" width="44" height="10" rx="2" fill="#1D4F91"/><rect x="4" y="14" width="52" height="44" rx="4" fill="#fff" stroke="#18212C" stroke-width="2"/><rect x="10" y="26" width="40" height="16" fill="#1D4F91"/></svg>
-          </div>
-          <div class="beam">
-            <span class="tag" data-i18n="cat.2">Car cosmetics</span>
-            <span class="tag" data-i18n="cat.3">Auto chemicals</span>
-          </div>
-        </div>
+          <!-- products: drawn standing on y=0 -->
+          <g id="p-spray">
+            <rect x="0" y="-70" width="30" height="70" rx="3" fill="var(--c1)" stroke="#18212C" stroke-width="2"/>
+            <path d="M1 -69 Q15 -82 29 -69z" fill="var(--c1)" stroke="#18212C" stroke-width="2"/>
+            <rect x="8" y="-86" width="14" height="10" rx="2" fill="var(--c2)" stroke="#18212C" stroke-width="2"/>
+            <rect x="11" y="-91" width="8" height="5" fill="#18212C"/>
+            <rect x="3" y="-54" width="24" height="30" fill="#fff"/>
+            <rect x="6" y="-49" width="18" height="5" fill="var(--c3)"/>
+            <rect x="6" y="-40" width="13" height="2" fill="#18212C"/>
+            <rect x="6" y="-35" width="9" height="2" fill="#18212C"/>
+            <rect x="4" y="-66" width="3" height="58" fill="#fff" opacity=".28"/>
+            <rect x="0" y="-7" width="30" height="7" fill="#8C97A3" stroke="#18212C" stroke-width="2"/>
+          </g>
+          <g id="p-jug">
+            <path d="M2 -4 V-62 L14 -76 H54 L62 -64 V-4 Q62 0 58 0 H6 Q2 0 2 -4z" fill="var(--c1)" stroke="#18212C" stroke-width="2"/>
+            <path d="M36 -76 V-88 H56 V-70" fill="none" stroke="#18212C" stroke-width="7" stroke-linejoin="round"/>
+            <path d="M36 -76 V-88 H56 V-70" fill="none" stroke="var(--c1)" stroke-width="3" stroke-linejoin="round"/>
+            <rect x="12" y="-90" width="16" height="14" rx="2" fill="var(--c2)" stroke="#18212C" stroke-width="2"/>
+            <rect x="10" y="-56" width="44" height="38" fill="#fff" stroke="#18212C" stroke-width="1.5"/>
+            <rect x="10" y="-56" width="44" height="11" fill="var(--c3)"/>
+            <rect x="15" y="-38" width="26" height="3" fill="#18212C"/>
+            <rect x="15" y="-31" width="18" height="2" fill="#18212C"/>
+            <rect x="56" y="-58" width="3" height="50" fill="#fff" opacity=".35"/>
+          </g>
+          <g id="p-bottle">
+            <path d="M10 -70 h14 v10 l8 10 v46 q0 4 -4 4 H6 q-4 0 -4 -4 v-46 l8 -10z" fill="var(--c1)" stroke="#18212C" stroke-width="2"/>
+            <rect x="9" y="-80" width="16" height="10" rx="1.5" fill="var(--c2)" stroke="#18212C" stroke-width="2"/>
+            <rect x="5" y="-42" width="24" height="28" fill="#fff" stroke="#18212C" stroke-width="1"/>
+            <rect x="5" y="-42" width="24" height="8" fill="var(--c3)"/>
+            <rect x="9" y="-29" width="14" height="2" fill="#18212C"/>
+            <rect x="9" y="-24" width="9" height="2" fill="#18212C"/>
+          </g>
+          <g id="p-trigger">
+            <path d="M8 0 h22 q4 0 4 -4 V-46 q0 -7 -7 -9 H11 q-7 2 -7 9 V-4 q0 4 4 4z" fill="var(--c1)" stroke="#18212C" stroke-width="2"/>
+            <rect x="13" y="-62" width="12" height="8" fill="#2E3A48" stroke="#18212C" stroke-width="1.5"/>
+            <path d="M6 -62 V-74 H32 L40 -70 V-66 H30 V-62z" fill="var(--c2)" stroke="#18212C" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M24 -62 L19 -51 H23 L28 -61" fill="var(--c2)" stroke="#18212C" stroke-width="1.5"/>
+            <rect x="9" y="-38" width="20" height="24" rx="2" fill="#fff"/>
+            <circle cx="19" cy="-28" r="5" fill="var(--c1)"/>
+            <rect x="12" y="-19" width="14" height="2" fill="#18212C"/>
+            <rect x="29" y="-48" width="2.5" height="40" fill="#fff" opacity=".35"/>
+          </g>
+          <g id="p-jar">
+            <rect x="0" y="-29" width="50" height="29" rx="4" fill="var(--c1)" stroke="#18212C" stroke-width="2"/>
+            <rect x="2" y="-38" width="46" height="10" rx="2" fill="var(--c2)" stroke="#18212C" stroke-width="2"/>
+            <rect x="7" y="-23" width="36" height="13" fill="#fff"/>
+            <rect x="11" y="-19" width="20" height="3" fill="#18212C"/>
+          </g>
+          <g id="p-cloth">
+            <rect x="0" y="-12" width="60" height="12" rx="6" fill="#F4CB2F" stroke="#18212C" stroke-width="2"/>
+            <rect x="3" y="-23" width="56" height="12" rx="6" fill="#1D4F91" stroke="#18212C" stroke-width="2"/>
+            <rect x="1" y="-34" width="58" height="12" rx="6" fill="#E5631B" stroke="#18212C" stroke-width="2"/>
+            <path d="M10 -28 h40 M10 -17 h40 M10 -6 h40" stroke="#fff" stroke-opacity=".45" stroke-width="1.5" stroke-dasharray="3 3"/>
+          </g>
+          <g id="p-box">
+            <rect x="0" y="-60" width="80" height="60" fill="var(--k)" stroke="#18212C" stroke-width="2"/>
+            <path d="M1 -51 H79" stroke="#18212C" stroke-opacity=".35" stroke-width="1.5"/>
+            <rect x="34" y="-59" width="12" height="22" fill="#fff" opacity=".4"/>
+            <rect x="8" y="-30" width="40" height="22" fill="#fff" stroke="#18212C" stroke-width="1"/>
+            <rect x="12" y="-26" width="26" height="4" fill="var(--c1)"/>
+            <rect x="12" y="-18" width="18" height="2" fill="#18212C"/>
+            <path d="M59 -12 v-14 m-4 5 l4 -5 l4 5 M70 -12 v-14 m-4 5 l4 -5 l4 5" fill="none" stroke="#18212C" stroke-width="2"/>
+          </g>
+          <g id="p-drum">
+            <path d="M2 -70 V-12 c0 6 14 10 31 10 s31 -4 31 -10 V-70z" fill="#8C97A3" stroke="#18212C" stroke-width="2"/>
+            <path d="M2 -44 c0 6 14 10 31 10 s31 -4 31 -10 v14 c0 6 -14 10 -31 10 S2 -24 2 -30z" fill="var(--c1)"/>
+            <ellipse cx="33" cy="-70" rx="31" ry="10" fill="#B7C0C8" stroke="#18212C" stroke-width="2"/>
+            <ellipse cx="46" cy="-71" rx="5" ry="2.2" fill="#18212C"/>
+            <path d="M2 -56 c0 6 14 10 31 10 s31 -4 31 -10" fill="none" stroke="#18212C" stroke-width="1.5" stroke-opacity=".5"/>
+            <rect x="8" y="-62" width="4" height="48" fill="#fff" opacity=".3"/>
+          </g>
+          <g id="p-filter">
+            <rect x="0" y="-50" width="40" height="50" rx="4" fill="var(--c1)" stroke="#18212C" stroke-width="2"/>
+            <rect x="0" y="-50" width="40" height="8" rx="3" fill="#8C97A3" stroke="#18212C" stroke-width="2"/>
+            <path d="M4 -50 v8 M10 -50 v8 M16 -50 v8 M22 -50 v8 M28 -50 v8 M34 -50 v8" stroke="#18212C" stroke-width="1"/>
+            <rect x="6" y="-35" width="28" height="20" fill="#fff"/>
+            <rect x="10" y="-31" width="18" height="3" fill="#18212C"/>
+            <rect x="10" y="-25" width="12" height="2" fill="#18212C"/>
+            <rect x="34" y="-40" width="3" height="34" fill="#fff" opacity=".3"/>
+          </g>
+          <g id="p-disc">
+            <circle cx="32" cy="-32" r="31" fill="#B7C0C8" stroke="#18212C" stroke-width="2"/>
+            <circle cx="32" cy="-32" r="24" fill="none" stroke="#8C97A3" stroke-width="2"/>
+            <g fill="#4A5866"><circle cx="32" cy="-55" r="1.6"/><circle cx="52" cy="-42" r="1.6"/><circle cx="48" cy="-16" r="1.6"/><circle cx="16" cy="-16" r="1.6"/><circle cx="12" cy="-42" r="1.6"/></g>
+            <circle cx="32" cy="-32" r="14" fill="#8C97A3" stroke="#18212C" stroke-width="2"/>
+            <circle cx="32" cy="-32" r="5" fill="#E6E9EC" stroke="#18212C" stroke-width="1.5"/>
+            <g fill="#18212C"><circle cx="32" cy="-41" r="1.8"/><circle cx="40.5" cy="-35" r="1.8"/><circle cx="37" cy="-25" r="1.8"/><circle cx="27" cy="-25" r="1.8"/><circle cx="23.5" cy="-35" r="1.8"/></g>
+            <path d="M12 -50 A26 26 0 0 1 32 -58" fill="none" stroke="#fff" stroke-width="3" stroke-opacity=".6" stroke-linecap="round"/>
+          </g>
+          <g id="p-plug">
+            <rect x="0" y="-70" width="36" height="70" rx="3" fill="var(--c1)" stroke="#18212C" stroke-width="2"/>
+            <rect x="13" y="-66" width="10" height="4" rx="2" fill="#E6E9EC"/>
+            <rect x="7" y="-58" width="22" height="50" rx="9" fill="#fff" fill-opacity=".6" stroke="#18212C" stroke-width="1"/>
+            <rect x="14" y="-54" width="8" height="12" rx="1" fill="#fff" stroke="#18212C" stroke-width="1"/>
+            <rect x="12" y="-42" width="12" height="7" fill="#8C97A3" stroke="#18212C" stroke-width="1"/>
+            <rect x="15" y="-35" width="6" height="14" fill="#B7C0C8" stroke="#18212C" stroke-width="1"/>
+            <path d="M18 -21 v6 h3" fill="none" stroke="#18212C" stroke-width="1.5"/>
+          </g>
+          <g id="p-mat">
+            <rect x="12" y="-44" width="56" height="44" fill="#2E3A48" stroke="#18212C" stroke-width="2"/>
+            <path d="M22 -44 v44 M32 -44 v44 M42 -44 v44 M52 -44 v44 M62 -44 v44" stroke="#4A5866" stroke-width="2"/>
+            <rect x="38" y="-45" width="9" height="46" fill="var(--c1)" stroke="#18212C" stroke-width="1.5"/>
+            <ellipse cx="12" cy="-22" rx="11" ry="22" fill="#4A5866" stroke="#18212C" stroke-width="2"/>
+            <path d="M12 -22 m0 -3 a3 3 0 1 1 -3 4 a7 7 0 1 1 9 -8 a11 11 0 1 1 -14 12" fill="none" stroke="#18212C" stroke-width="1.5"/>
+          </g>
+          <g id="p-fresh">
+            <rect x="0" y="-80" width="40" height="80" rx="3" fill="var(--c2)" stroke="#18212C" stroke-width="2"/>
+            <rect x="15" y="-76" width="10" height="4" rx="2" fill="#E6E9EC" stroke="#18212C" stroke-width="1"/>
+            <path d="M20 -66 L33 -46 H26 L35 -30 H24 V-22 H16 V-30 H5 L14 -46 H7z" fill="var(--c1)" stroke="#18212C" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M20 -70 v4" stroke="#18212C" stroke-width="1"/>
+            <rect x="8" y="-14" width="24" height="3" fill="#18212C"/>
+          </g>
+          <g id="p-wiper">
+            <rect x="0" y="-86" width="22" height="86" rx="2" fill="var(--c1)" stroke="#18212C" stroke-width="2"/>
+            <rect x="5" y="-78" width="12" height="62" rx="1" fill="#fff"/>
+            <path d="M11 -75 V-19" stroke="#18212C" stroke-width="3"/>
+            <path d="M8 -75 V-19" stroke="#8C97A3" stroke-width="1"/>
+            <rect x="5" y="-12" width="12" height="3" fill="#F4CB2F"/>
+          </g>
+          <g id="p-pack">
+            <rect x="0" y="-76" width="60" height="76" rx="3" fill="var(--c1)" stroke="#18212C" stroke-width="2"/>
+            <rect x="8" y="-64" width="44" height="24" fill="#fff"/>
+            <rect x="13" y="-57" width="28" height="4" fill="#C24F10"/>
+            <rect x="13" y="-50" width="18" height="3" fill="#18212C"/>
+            <rect x="14" y="-32" width="32" height="20" rx="4" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="2"/>
+            <circle cx="30" cy="-22" r="4" fill="#fff" fill-opacity=".5"/>
+          </g>
+        </defs>
 
-        <div class="shelf">
-          <div class="stock stock--wide">
-            <span class="item box box--lg"><i></i></span>
-            <span class="item box box--md"><i></i></span>
-            <svg class="item item--drum" viewBox="0 0 70 84"><path d="M4 14v58c0 6 14 10 31 10s31-4 31-10V14z" fill="#8C97A3" stroke="#18212C" stroke-width="2"/><ellipse cx="35" cy="14" rx="31" ry="10" fill="#B7C0C8" stroke="#18212C" stroke-width="2"/><path d="M4 40c0 6 14 10 31 10s31-4 31-10v14c0 6-14 10-31 10S4 60 4 54z" fill="#1D4F91"/></svg>
-            <span class="item box box--sm"><i></i></span>
-          </div>
-          <div class="beam">
-            <span class="tag" data-i18n="cat.1">Auto parts</span>
-          </div>
-        </div>
+        <g class="rack-back">
+          <rect x="40" y="18" width="520" height="480" fill="url(#peg)" stroke="#18212C" stroke-width="2"/>
+        </g>
 
-        <div class="shelf">
-          <div class="stock stock--wide">
-            <span class="item box box--tall"><i></i></span>
-            <svg class="item item--pack" viewBox="0 0 70 80"><rect x="4" y="4" width="62" height="74" rx="3" fill="#2E3A48" stroke="#18212C" stroke-width="2"/><rect x="12" y="16" width="46" height="22" fill="#fff"/><rect x="18" y="23" width="30" height="4" fill="#C24F10"/><rect x="18" y="30" width="20" height="3" fill="#18212C"/></svg>
-            <span class="item box box--md"><i></i></span>
-            <svg class="item item--tube" viewBox="0 0 30 100"><rect x="4" y="2" width="22" height="96" rx="3" fill="#1D4F91" stroke="#18212C" stroke-width="2"/><rect x="8" y="30" width="14" height="40" fill="#fff"/></svg>
-          </div>
-          <div class="beam">
-            <span class="tag" data-i18n="cat.0">Car accessories</span>
-          </div>
-        </div>
-        <div class="floor"></div>
-      </div>
+        <!-- uprights -->
+        <g class="rack-frame">
+          <rect x="20" y="8" width="24" height="514" fill="#1D4F91" stroke="#18212C" stroke-width="2"/>
+          <rect x="20" y="8" width="24" height="514" fill="url(#slots)"/>
+          <rect x="556" y="8" width="24" height="514" fill="#1D4F91" stroke="#18212C" stroke-width="2"/>
+          <rect x="556" y="8" width="24" height="514" fill="url(#slots)"/>
+        </g>
+
+        <!-- SHELF 1: auto chemicals (cat 3) -->
+        <g class="zone" data-cat="3" tabindex="0" role="button">
+          <rect class="zone__hit" x="44" y="22" width="512" height="112" fill="transparent"/>
+          <rect x="44" y="128" width="512" height="8" fill="url(#deck)"/>
+          <g class="slot" transform="translate(58 132)"><ellipse class="shadow" cx="32" cy="0" rx="32" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#1D4F91;--c2:#F4CB2F;--c3:#E5631B"><use href="#p-jug"/></g></g></g>
+          <g class="slot" transform="translate(134 132)"><ellipse class="shadow" cx="15" cy="0" rx="15" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#E5631B;--c2:#18212C;--c3:#1D4F91"><use href="#p-spray"/></g></g></g>
+          <g class="slot" transform="translate(170 132)"><ellipse class="shadow" cx="15" cy="0" rx="15" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#1D4F91;--c2:#fff;--c3:#E5631B"><use href="#p-spray"/></g></g></g>
+          <g class="slot" transform="translate(210 132)"><ellipse class="shadow" cx="32" cy="0" rx="32" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#F4CB2F;--c2:#18212C;--c3:#1D4F91"><use href="#p-jug"/></g></g></g>
+          <g class="slot" transform="translate(286 132)"><ellipse class="shadow" cx="17" cy="0" rx="17" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#fff;--c2:#E5631B;--c3:#E5631B"><use href="#p-bottle"/></g></g></g>
+          <g class="slot" transform="translate(324 132)"><ellipse class="shadow" cx="17" cy="0" rx="17" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#fff;--c2:#1D4F91;--c3:#1D4F91"><use href="#p-bottle"/></g></g></g>
+          <g class="slot" transform="translate(370 132)"><ellipse class="shadow" cx="33" cy="0" rx="33" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#1D4F91"><use href="#p-drum"/></g></g></g>
+          <g class="slot" transform="translate(452 132)"><ellipse class="shadow" cx="15" cy="0" rx="15" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#2E3A48;--c2:#E5631B;--c3:#F4CB2F"><use href="#p-spray"/></g></g></g>
+          <g class="slot" transform="translate(488 132)"><ellipse class="shadow" cx="15" cy="0" rx="15" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#F4CB2F;--c2:#18212C;--c3:#1D4F91"><use href="#p-spray"/></g></g></g>
+          <g class="beam"><rect x="30" y="136" width="540" height="24" fill="#E5631B" stroke="#18212C" stroke-width="2"/><rect x="31" y="137" width="538" height="4" fill="#fff" opacity=".22"/></g>
+          <g class="shelf-tag"><rect class="shelf-tag__bg" x="56" y="139" width="120" height="18" fill="#F4CB2F" stroke="#18212C" stroke-width="1.5"/><text x="63" y="153" data-i18n="cat.3">Auto chemicals</text></g>
+        </g>
+
+        <!-- SHELF 2: car cosmetics (cat 2) -->
+        <g class="zone" data-cat="2" tabindex="0" role="button">
+          <rect class="zone__hit" x="44" y="162" width="512" height="92" fill="transparent"/>
+          <rect x="44" y="248" width="512" height="8" fill="url(#deck)"/>
+          <g class="slot" transform="translate(58 252)"><ellipse class="shadow" cx="20" cy="0" rx="18" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#5B8FD1;--c2:#18212C"><use href="#p-trigger"/></g></g></g>
+          <g class="slot" transform="translate(104 252)"><ellipse class="shadow" cx="20" cy="0" rx="18" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#E5631B;--c2:#18212C"><use href="#p-trigger"/></g></g></g>
+          <g class="slot" transform="translate(154 252)"><ellipse class="shadow" cx="25" cy="0" rx="25" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#1D4F91;--c2:#F4CB2F"><use href="#p-jar"/><use href="#p-jar" transform="translate(0 -38)" style="--c1:#2E3A48;--c2:#E5631B"/></g></g></g>
+          <g class="slot" transform="translate(216 252)"><ellipse class="shadow" cx="30" cy="0" rx="30" ry="3"/><g class="sku"><g class="sku__body"><use href="#p-cloth"/></g></g></g>
+          <g class="slot" transform="translate(288 252)"><ellipse class="shadow" cx="17" cy="0" rx="17" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#F4CB2F;--c2:#18212C;--c3:#18212C"><use href="#p-bottle"/></g></g></g>
+          <g class="slot" transform="translate(328 252)"><ellipse class="shadow" cx="17" cy="0" rx="17" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#D6E4F5;--c2:#1D4F91;--c3:#1D4F91"><use href="#p-bottle"/></g></g></g>
+          <g class="slot" transform="translate(372 252)"><ellipse class="shadow" cx="20" cy="0" rx="18" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#fff;--c2:#1D4F91"><use href="#p-trigger"/></g></g></g>
+          <g class="slot" transform="translate(426 252)"><ellipse class="shadow" cx="40" cy="0" rx="40" ry="3"/><g class="sku"><g class="sku__body" style="--k:#C99A5B;--c1:#E5631B"><use href="#p-box"/></g></g></g>
+          <g class="beam"><rect x="30" y="256" width="540" height="24" fill="#E5631B" stroke="#18212C" stroke-width="2"/><rect x="31" y="257" width="538" height="4" fill="#fff" opacity=".22"/></g>
+          <g class="shelf-tag"><rect class="shelf-tag__bg" x="56" y="259" width="120" height="18" fill="#F4CB2F" stroke="#18212C" stroke-width="1.5"/><text x="63" y="273" data-i18n="cat.2">Car cosmetics</text></g>
+        </g>
+
+        <!-- SHELF 3: auto parts (cat 1) -->
+        <g class="zone" data-cat="1" tabindex="0" role="button">
+          <rect class="zone__hit" x="44" y="282" width="512" height="92" fill="transparent"/>
+          <rect x="44" y="368" width="512" height="8" fill="url(#deck)"/>
+          <g class="slot" transform="translate(56 372)"><ellipse class="shadow" cx="50" cy="0" rx="50" ry="3"/><g class="sku"><g class="sku__body" style="--k:#C99A5B;--c1:#1D4F91"><use href="#p-box" transform="scale(1.25)"/></g></g></g>
+          <g class="slot" transform="translate(166 372)"><ellipse class="shadow" cx="32" cy="0" rx="26" ry="3"/><g class="sku"><g class="sku__body"><use href="#p-disc"/></g></g></g>
+          <g class="slot" transform="translate(240 372)"><ellipse class="shadow" cx="20" cy="0" rx="20" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#1D4F91"><use href="#p-filter"/></g></g></g>
+          <g class="slot" transform="translate(286 372)"><ellipse class="shadow" cx="20" cy="0" rx="20" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#E5631B"><use href="#p-filter"/></g></g></g>
+          <g class="slot" transform="translate(338 372)"><ellipse class="shadow" cx="18" cy="0" rx="18" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#1D4F91"><use href="#p-plug"/></g></g></g>
+          <g class="slot" transform="translate(380 372)"><ellipse class="shadow" cx="18" cy="0" rx="18" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#E5631B"><use href="#p-plug"/></g></g></g>
+          <g class="slot" transform="translate(428 372)"><ellipse class="shadow" cx="44" cy="0" rx="44" ry="3"/><g class="sku"><g class="sku__body" style="--k:#B98A4E;--c1:#E5631B"><use href="#p-box" transform="scale(1.1)"/></g></g></g>
+          <g class="beam"><rect x="30" y="376" width="540" height="24" fill="#E5631B" stroke="#18212C" stroke-width="2"/><rect x="31" y="377" width="538" height="4" fill="#fff" opacity=".22"/></g>
+          <g class="shelf-tag"><rect class="shelf-tag__bg" x="56" y="379" width="120" height="18" fill="#F4CB2F" stroke="#18212C" stroke-width="1.5"/><text x="63" y="393" data-i18n="cat.1">Auto parts</text></g>
+        </g>
+
+        <!-- SHELF 4: car accessories (cat 0) -->
+        <g class="zone" data-cat="0" tabindex="0" role="button">
+          <rect class="zone__hit" x="44" y="402" width="512" height="92" fill="transparent"/>
+          <rect x="44" y="488" width="512" height="8" fill="url(#deck)"/>
+          <g class="slot" transform="translate(56 492)"><ellipse class="shadow" cx="38" cy="0" rx="34" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#E5631B"><use href="#p-mat"/></g></g></g>
+          <g class="slot" transform="translate(140 492)"><ellipse class="shadow" cx="20" cy="0" rx="20" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#2F9E5B;--c2:#fff"><use href="#p-fresh"/></g></g></g>
+          <g class="slot" transform="translate(186 492)"><ellipse class="shadow" cx="20" cy="0" rx="20" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#E5631B;--c2:#F4CB2F"><use href="#p-fresh"/></g></g></g>
+          <g class="slot" transform="translate(236 492)"><ellipse class="shadow" cx="11" cy="0" rx="11" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#1D4F91"><use href="#p-wiper"/></g></g></g>
+          <g class="slot" transform="translate(268 492)"><ellipse class="shadow" cx="30" cy="0" rx="30" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#2E3A48"><use href="#p-pack"/></g></g></g>
+          <g class="slot" transform="translate(340 492)"><ellipse class="shadow" cx="40" cy="0" rx="40" ry="3"/><g class="sku"><g class="sku__body" style="--k:#1D4F91;--c1:#F4CB2F"><use href="#p-box"/></g></g></g>
+          <g class="slot" transform="translate(430 492)"><ellipse class="shadow" cx="32" cy="0" rx="32" ry="3"/><g class="sku"><g class="sku__body" style="--k:#C99A5B;--c1:#1D4F91"><use href="#p-box" transform="scale(.8)"/></g></g></g>
+          <g class="slot" transform="translate(504 492)"><ellipse class="shadow" cx="20" cy="0" rx="20" ry="3"/><g class="sku"><g class="sku__body" style="--c1:#1D4F91;--c2:#fff"><use href="#p-fresh"/></g></g></g>
+          <g class="beam"><rect x="30" y="496" width="540" height="24" fill="#E5631B" stroke="#18212C" stroke-width="2"/><rect x="31" y="497" width="538" height="4" fill="#fff" opacity=".22"/></g>
+          <g class="shelf-tag"><rect class="shelf-tag__bg" x="56" y="499" width="120" height="18" fill="#F4CB2F" stroke="#18212C" stroke-width="1.5"/><text x="63" y="513" data-i18n="cat.0">Car accessories</text></g>
+        </g>
+
+        <rect x="30" y="520" width="540" height="14" fill="url(#hazard)" stroke="#18212C" stroke-width="2"/>
+
+        <!-- pop-up category label -->
+        <g class="callout" transform="translate(300 60)" aria-hidden="true">
+          <g class="callout__pop">
+            <path class="callout__bg" d="M-60 -30 H60 V0 H8 L0 9 L-8 0 H-60z" fill="#18212C"/>
+            <text class="callout__text" x="0" y="-10" text-anchor="middle"></text>
+          </g>
+        </g>
+      </svg>
+      <p class="rack-hint" data-i18n="ui.rackHint">Point at or tap a product to see its section</p>
     </div>
   </section>
 
@@ -235,7 +426,7 @@
           <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
           <span data-i18n="ctas.call">Call +374 98 828200</span>
         </a>
-        <a class="btn btn--route" href="https://www.google.com/maps/search/?api=1&amp;query=Mazmanyan+Street+1%2C+Yerevan%2C+Armenia" target="_blank" rel="noopener">
+        <a class="btn btn--route" href="https://yandex.com/maps/?text=Mazmanyan%20Street%201%2C%20Yerevan%2C%20Armenia" target="_blank" rel="noopener">
           <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
           <span data-i18n="ctas.directions">Get directions</span>
         </a>
@@ -256,6 +447,7 @@
   <div class="foot__in">
     <p data-i18n="footer.tagline">CG Car Goods: car accessories, parts, car cosmetics and auto chemicals in Yerevan.</p>
     <p class="foot__small">© <span id="year">2026</span> CG Car Goods. <span data-i18n="footer.rights">All rights reserved.</span></p>
+    <p class="foot__demo" data-i18n="footer.demo">This is a demo website.</p>
   </div>
 </footer>
 
@@ -264,7 +456,7 @@
     <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
     <span data-i18n="ui.dockCall">Call</span>
   </a>
-  <a class="dock__route" href="https://www.google.com/maps/search/?api=1&amp;query=Mazmanyan+Street+1%2C+Yerevan%2C+Armenia" target="_blank" rel="noopener">
+  <a class="dock__route" href="https://yandex.com/maps/?text=Mazmanyan%20Street%201%2C%20Yerevan%2C%20Armenia" target="_blank" rel="noopener">
     <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
     <span data-i18n="ui.dockRoute">Directions</span>
   </a>

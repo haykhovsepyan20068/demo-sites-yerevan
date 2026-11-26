@@ -37,6 +37,8 @@
       'footer.tagline': 'Shark Gym. Fitness and bodybuilding in Ajapnyak, Yerevan.',
       'footer.rights': 'All rights reserved.',
       'aria.menu': 'Menu', 'aria.lang': 'Language', 'aria.nav': 'Main', 'aria.dock': 'Quick contact', 'aria.band': 'Membership',
+      'aria.scene': 'Shark Gym: barbell, dumbbell and shark fin', 'aria.fin': 'Shark fin', 'aria.bar': 'Loaded barbell', 'aria.bell': 'Dumbbell',
+      'footer.demo': 'This is a demo website.',
       'og.locale': 'en_US', 'og.alt': 'hy_AM'
     },
     hy: {
@@ -72,6 +74,8 @@
       'footer.tagline': 'Շարք Ջիմ։ Ֆիթնես և բոդիբիլդինգ Երևանի Աջափնյակում։',
       'footer.rights': 'Բոլոր իրավունքները պաշտպանված են։',
       'aria.menu': 'Ընտրացանկ', 'aria.lang': 'Լեզու', 'aria.nav': 'Հիմնական ընտրացանկ', 'aria.dock': 'Արագ կապ', 'aria.band': 'Աբոնեմենտ',
+      'aria.scene': 'Շարք Ջիմ՝ ծանրաձող, հանտել և շնաձկան լողակ', 'aria.fin': 'Շնաձկան լողակ', 'aria.bar': 'Ծանրաձող՝ սկավառակներով', 'aria.bell': 'Հանտել',
+      'footer.demo': 'Սա դեմո կայք է։',
       'og.locale': 'hy_AM', 'og.alt': 'en_US'
     }
   };
@@ -121,6 +125,49 @@
   });
   nav.addEventListener('click', function (e) { if (e.target.closest('a')) closeNav(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeNav(); });
+
+  // Hero scene: tap toggles glow (touch), cursor parallax (fine pointers, motion allowed)
+  var scene = document.querySelector('.scene');
+  if (scene) {
+    var parts = scene.querySelectorAll('.part');
+    parts.forEach(function (p) {
+      p.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var lit = !p.classList.contains('is-lit');
+        parts.forEach(function (o) { o.classList.remove('is-lit'); });
+        if (lit) p.classList.add('is-lit');
+      });
+      p.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); p.click(); }
+      });
+    });
+    document.addEventListener('click', function () {
+      parts.forEach(function (o) { o.classList.remove('is-lit'); });
+    });
+
+    var still = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var layers = scene.querySelectorAll('.layer');
+    var hero = document.querySelector('.hero');
+    var raf = 0, tx = 0, ty = 0;
+    function apply() {
+      raf = 0;
+      layers.forEach(function (l) {
+        var d = +l.getAttribute('data-depth') || 0;
+        l.style.transform = 'translate(' + (tx * d).toFixed(1) + 'px,' + (ty * d * .5).toFixed(1) + 'px)';
+      });
+    }
+    hero.addEventListener('pointermove', function (e) {
+      if (still.matches || e.pointerType !== 'mouse') return;
+      var r = hero.getBoundingClientRect();
+      tx = ((e.clientX - r.left) / r.width - .5) * 2;
+      ty = ((e.clientY - r.top) / r.height - .5) * 2;
+      if (!raf) raf = requestAnimationFrame(apply);
+    });
+    hero.addEventListener('pointerleave', function () {
+      tx = ty = 0;
+      if (!raf) raf = requestAnimationFrame(apply);
+    });
+  }
 
   var y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();

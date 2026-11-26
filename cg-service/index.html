@@ -93,10 +93,173 @@
           <a class="btn btn--line" href="#services" data-i18n="ctas.services">See services</a>
         </div>
       </div>
-      <div class="bay" aria-hidden="true">
-        <span class="bay__word" data-i18n="ui.garage">Garage</span>
-        <span class="bay__num">13</span>
-      </div>
+      <figure class="bay">
+        <div class="xp" id="xp">
+          <svg class="xp__svg" viewBox="0 0 500 520" role="group" aria-label="Exploded view of the parts we work on" data-i18n-aria="ui.xpLabel">
+            <defs>
+              <pattern id="xp-peg" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="13" cy="13" r="2.4" fill="#1b1e21"/></pattern>
+              <linearGradient id="xp-steel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e2e6e9"/><stop offset=".45" stop-color="#a9b1b6"/><stop offset="1" stop-color="#6f777d"/></linearGradient>
+              <linearGradient id="xp-steelV" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6d757b"/><stop offset=".35" stop-color="#e4e8ea"/><stop offset=".6" stop-color="#b4bbc0"/><stop offset="1" stop-color="#5d656b"/></linearGradient>
+              <linearGradient id="xp-steelH" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6d757b"/><stop offset=".35" stop-color="#e4e8ea"/><stop offset=".6" stop-color="#b4bbc0"/><stop offset="1" stop-color="#5d656b"/></linearGradient>
+              <radialGradient id="xp-rotor"><stop offset=".42" stop-color="#959da3"/><stop offset=".82" stop-color="#ced3d6"/><stop offset="1" stop-color="#7a8288"/></radialGradient>
+              <radialGradient id="xp-refl" cx=".4" cy=".35"><stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#c3c9cd"/><stop offset="1" stop-color="#4f565b"/></radialGradient>
+              <radialGradient id="xp-lens" cx=".35" cy=".3"><stop offset="0" stop-color="#eef2f4"/><stop offset=".45" stop-color="#6d7f8c"/><stop offset="1" stop-color="#1d2023"/></radialGradient>
+              <linearGradient id="xp-beam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff6c8" stop-opacity=".95"/><stop offset="1" stop-color="#f0c02e" stop-opacity="0"/></linearGradient>
+              <linearGradient id="xp-spray" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eef3f6" stop-opacity=".95"/><stop offset="1" stop-color="#eef3f6" stop-opacity="0"/></linearGradient>
+              <linearGradient id="xp-heatL" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c9a24a" stop-opacity="0"/><stop offset=".45" stop-color="#c9a24a" stop-opacity=".55"/><stop offset=".75" stop-color="#7a5f9a" stop-opacity=".65"/><stop offset="1" stop-color="#4a6c9c" stop-opacity=".75"/></linearGradient>
+              <linearGradient id="xp-heatR" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#c9a24a" stop-opacity="0"/><stop offset=".45" stop-color="#c9a24a" stop-opacity=".55"/><stop offset=".75" stop-color="#7a5f9a" stop-opacity=".65"/><stop offset="1" stop-color="#4a6c9c" stop-opacity=".75"/></linearGradient>
+            </defs>
+
+            <rect width="500" height="520" fill="#33383c"/>
+            <rect width="500" height="520" fill="url(#xp-peg)" opacity=".75"/>
+            <g class="xp__guide" aria-hidden="true">
+              <circle cx="255" cy="305" r="130"/>
+              <path d="M110 305 H400 M255 160 V450"/>
+              <path d="M450 6 V246 M95 20 V330"/>
+            </g>
+
+            <!-- shock absorber: suspension and running gear -->
+            <g class="part part--shock" data-part="1" data-d="14" style="--ox:-7px;--oy:-5px" tabindex="0" role="button" aria-label="Suspension and running gear">
+              <g class="part__body">
+                <rect class="hit" x="44" y="18" width="104" height="314"/>
+                <g transform="rotate(-6 95 170)">
+                  <circle cx="95" cy="38" r="13" fill="url(#xp-steel)" stroke="#1d2023" stroke-width="2.5"/>
+                  <circle cx="95" cy="38" r="5.5" fill="#1d2023"/>
+                  <rect x="70" y="50" width="50" height="8" rx="2" fill="#3d4347" stroke="#1d2023" stroke-width="2"/>
+                  <rect x="91" y="58" width="8" height="80" fill="url(#xp-steelV)" stroke="#1d2023" stroke-width="1.5"/>
+                  <ellipse cx="95" cy="78" rx="35" ry="7" fill="#4a5055" stroke="#1d2023" stroke-width="2"/>
+                  <rect x="75" y="128" width="40" height="146" rx="5" fill="url(#xp-steelV)" stroke="#1d2023" stroke-width="2.5"/>
+                  <path d="M80 140 V262" stroke="#fff" stroke-opacity=".45" stroke-width="2"/>
+                  <path class="spring" d="M70 82 L127 92 L63 106 L127 120 L63 134 L127 148 L63 162 L127 176 L63 190 L127 204 L63 218 L120 228" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  <ellipse cx="95" cy="230" rx="35" ry="7" fill="#4a5055" stroke="#1d2023" stroke-width="2"/>
+                  <rect x="84" y="274" width="22" height="18" fill="#5d656b" stroke="#1d2023" stroke-width="2"/>
+                  <circle cx="95" cy="304" r="13" fill="url(#xp-steel)" stroke="#1d2023" stroke-width="2.5"/>
+                  <circle cx="95" cy="304" r="5.5" fill="#1d2023"/>
+                </g>
+              </g>
+            </g>
+
+            <!-- welded pipe joint: CO welding -->
+            <g class="part part--weld" data-part="3" data-d="18" style="--ox:-7px;--oy:4px" tabindex="0" role="button" aria-label="CO welding">
+              <g class="part__body">
+                <rect class="hit" x="16" y="322" width="142" height="80"/>
+                <rect x="30" y="362" width="57" height="28" fill="url(#xp-steelH)" stroke="#1d2023" stroke-width="2.5"/>
+                <rect x="58" y="363" width="29" height="26" fill="url(#xp-heatL)"/>
+                <rect x="93" y="362" width="57" height="28" fill="url(#xp-steelH)" stroke="#1d2023" stroke-width="2.5"/>
+                <rect x="93" y="363" width="29" height="26" fill="url(#xp-heatR)"/>
+                <ellipse cx="30" cy="376" rx="6" ry="14" fill="#2a2d31" stroke="#1d2023" stroke-width="2"/>
+                <ellipse cx="150" cy="376" rx="6" ry="14" fill="#5d656b" stroke="#1d2023" stroke-width="2"/>
+                <path class="bead" d="M90 360 q-5 3 0 6 q-5 3 0 6 q-5 3 0 6 q-5 3 0 6 q-5 3 0 6 q5 -3 0 -6 M90 360 q5 3 0 6 q5 3 0 6 q5 3 0 6 q5 3 0 6 q5 3 0 6" fill="none" stroke-width="3" stroke-linecap="round"/>
+                <g class="sparks" stroke-linecap="round">
+                  <path d="M90 358 L78 336 M90 358 L92 330 M90 358 L106 338 M90 358 L70 350 M90 358 L112 352"/>
+                  <circle cx="74" cy="332" r="1.8"/><circle cx="110" cy="332" r="1.8"/><circle cx="100" cy="326" r="1.4"/>
+                </g>
+              </g>
+            </g>
+
+            <!-- brake disc and caliper -->
+            <g class="part part--brake" data-part="2" data-d="8" style="--ox:0px;--oy:0px" tabindex="0" role="button" aria-label="Brake discs">
+              <g class="part__body">
+                <circle class="hit" cx="262" cy="295" r="142"/>
+                <g transform="translate(255 305)">
+                  <g class="rotor">
+                    <circle r="102" fill="url(#xp-rotor)" stroke="#1d2023" stroke-width="3"/>
+                    <g fill="none" stroke="#4f565b" stroke-width="1" opacity=".6"><circle r="95"/><circle r="90"/><circle r="84"/><circle r="72"/><circle r="64"/></g>
+                    <g fill="#2a2d31">
+                      <circle cx="78" r="4.2" transform="rotate(15)"/><circle cx="78" r="4.2" transform="rotate(45)"/><circle cx="78" r="4.2" transform="rotate(75)"/><circle cx="78" r="4.2" transform="rotate(105)"/><circle cx="78" r="4.2" transform="rotate(135)"/><circle cx="78" r="4.2" transform="rotate(165)"/><circle cx="78" r="4.2" transform="rotate(195)"/><circle cx="78" r="4.2" transform="rotate(225)"/><circle cx="78" r="4.2" transform="rotate(255)"/><circle cx="78" r="4.2" transform="rotate(285)"/><circle cx="78" r="4.2" transform="rotate(315)"/><circle cx="78" r="4.2" transform="rotate(345)"/>
+                      <circle cx="66" r="3.2"/><circle cx="66" r="3.2" transform="rotate(30)"/><circle cx="66" r="3.2" transform="rotate(60)"/><circle cx="66" r="3.2" transform="rotate(90)"/><circle cx="66" r="3.2" transform="rotate(120)"/><circle cx="66" r="3.2" transform="rotate(150)"/><circle cx="66" r="3.2" transform="rotate(180)"/><circle cx="66" r="3.2" transform="rotate(210)"/><circle cx="66" r="3.2" transform="rotate(240)"/><circle cx="66" r="3.2" transform="rotate(270)"/><circle cx="66" r="3.2" transform="rotate(300)"/><circle cx="66" r="3.2" transform="rotate(330)"/>
+                    </g>
+                    <circle r="53" fill="none" stroke="#1d2023" stroke-width="2"/>
+                    <circle r="46" fill="url(#xp-steel)" stroke="#1d2023" stroke-width="2.5"/>
+                    <g fill="#2a2d31"><circle cx="30" r="5.5" transform="rotate(-90)"/><circle cx="30" r="5.5" transform="rotate(-18)"/><circle cx="30" r="5.5" transform="rotate(54)"/><circle cx="30" r="5.5" transform="rotate(126)"/><circle cx="30" r="5.5" transform="rotate(198)"/></g>
+                    <circle r="15" fill="#1d2023" stroke="#8e969c" stroke-width="2"/>
+                    <path d="M-95 -24 A98 98 0 0 1 -58 -79" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="3" stroke-linecap="round"/>
+                  </g>
+                  <g class="cal-slide">
+                    <g transform="rotate(-52) translate(26 0)">
+                      <path class="xp__axis" d="M20 0 H170"/>
+                      <path d="M58 -40 Q70 0 58 40 L68 40 Q80 0 68 -40Z" fill="#4a4f54" stroke="#1d2023" stroke-width="2"/>
+                      <path d="M76 -46 Q126 -66 134 -32 L134 32 Q126 66 76 46 Q90 0 76 -46Z" fill="#a23b22" stroke="#1d2023" stroke-width="3" stroke-linejoin="round"/>
+                      <path d="M92 -32 Q102 0 92 32" fill="none" stroke="#d0603f" stroke-width="3" stroke-linecap="round"/>
+                      <circle cx="112" cy="-42" r="5" fill="url(#xp-steel)" stroke="#1d2023" stroke-width="1.5"/>
+                      <circle cx="112" cy="42" r="5" fill="url(#xp-steel)" stroke="#1d2023" stroke-width="1.5"/>
+                      <rect x="130" y="-8" width="14" height="16" rx="2" fill="url(#xp-steel)" stroke="#1d2023" stroke-width="1.5"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+
+            <!-- injector -->
+            <g class="part part--inj" data-part="0" data-d="16" style="--ox:6px;--oy:-6px" tabindex="0" role="button" aria-label="Injector cleaning">
+              <g class="part__body">
+                <rect class="hit" x="420" y="6" width="62" height="234"/>
+                <path class="xp__axis" d="M450 4 V244"/>
+                <rect x="444" y="14" width="12" height="7" rx="1.5" fill="#3d4347" stroke="#1d2023" stroke-width="1.5"/>
+                <rect x="432" y="20" width="36" height="27" rx="3" fill="#2a2d31" stroke="#1d2023" stroke-width="2.5"/>
+                <rect x="440" y="27" width="20" height="9" rx="1" fill="#1d2023"/>
+                <rect x="440" y="47" width="20" height="12" fill="#3d4347" stroke="#1d2023" stroke-width="1.5"/>
+                <rect x="432" y="59" width="36" height="58" rx="5" fill="url(#xp-steelV)" stroke="#1d2023" stroke-width="2.5"/>
+                <rect x="428" y="67" width="44" height="8" rx="4" fill="#4e6e5a" stroke="#1d2023" stroke-width="1.5"/>
+                <path d="M437 82 V110" stroke="#fff" stroke-opacity=".55" stroke-width="2"/>
+                <path d="M434 117 L466 117 L458 147 L442 147Z" fill="url(#xp-steelV)" stroke="#1d2023" stroke-width="2.5" stroke-linejoin="round"/>
+                <rect x="436" y="147" width="28" height="7" rx="3.5" fill="#4e6e5a" stroke="#1d2023" stroke-width="1.5"/>
+                <rect x="445" y="154" width="10" height="24" fill="url(#xp-steelV)" stroke="#1d2023" stroke-width="1.5"/>
+                <path d="M445 178 L455 178 L452 185 L448 185Z" fill="#5d656b" stroke="#1d2023" stroke-width="1"/>
+                <g class="spray">
+                  <path d="M450 188 L428 230 Q450 240 472 230 Z" fill="url(#xp-spray)"/>
+                  <circle cx="440" cy="214" r="1.6"/><circle cx="458" cy="210" r="1.6"/><circle cx="450" cy="222" r="1.4"/><circle cx="434" cy="226" r="1.2"/><circle cx="466" cy="226" r="1.2"/>
+                </g>
+              </g>
+            </g>
+
+            <!-- headlight -->
+            <g class="part part--light" data-part="4" data-d="12" style="--ox:-6px;--oy:6px" tabindex="0" role="button" aria-label="Lighting installation">
+              <g class="part__body">
+                <rect class="hit" x="24" y="404" width="190" height="104"/>
+                <path class="beam" d="M198 440 L346 412 L346 508 L198 476 Z" fill="url(#xp-beam)"/>
+                <path d="M40 422 L182 412 Q208 430 202 470 L188 500 L52 502 Q30 472 40 422 Z" fill="#2a2d31" stroke="#1d2023" stroke-width="3" stroke-linejoin="round"/>
+                <path d="M48 428 L178 419 Q198 434 194 468 L183 492 L58 494 Q40 470 48 428 Z" fill="#3a4045" stroke="#5d656b" stroke-width="1.5"/>
+                <circle cx="92" cy="457" r="29" fill="url(#xp-refl)" stroke="#1d2023" stroke-width="2"/>
+                <circle class="bulb" cx="92" cy="457" r="8"/>
+                <circle cx="156" cy="452" r="23" fill="url(#xp-lens)" stroke="#1d2023" stroke-width="2.5"/>
+                <circle class="bulb bulb--lens" cx="156" cy="452" r="6"/>
+                <path class="drl" d="M58 486 Q120 492 186 480" fill="none" stroke-width="4" stroke-linecap="round"/>
+                <path d="M52 432 Q60 426 96 424" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2" stroke-linecap="round"/>
+              </g>
+            </g>
+
+            <!-- alarm key fob -->
+            <g class="part part--alarm" data-part="5" data-d="18" style="--ox:6px;--oy:6px" tabindex="0" role="button" aria-label="Alarm installation">
+              <g class="part__body">
+                <rect class="hit" x="380" y="386" width="112" height="130"/>
+                <circle cx="425" cy="404" r="11" fill="none" stroke="url(#xp-steel)" stroke-width="4"/>
+                <rect x="395" y="416" width="60" height="94" rx="26" fill="#2a2d31" stroke="#1d2023" stroke-width="3"/>
+                <path d="M402 440 Q404 424 420 420" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="2" stroke-linecap="round"/>
+                <circle class="led" cx="425" cy="428" r="3.2"/>
+                <circle cx="425" cy="448" r="10" fill="#3d4347" stroke="#5d656b" stroke-width="1.5"/>
+                <path d="M420 449 h10 v6 h-10z M422 449 v-3 a3 3 0 0 1 6 0 v3" fill="none" stroke="#c3c9cd" stroke-width="1.5"/>
+                <circle cx="425" cy="474" r="10" fill="#3d4347" stroke="#5d656b" stroke-width="1.5"/>
+                <path d="M420 475 h10 v6 h-10z M422 475 v-3 a3 3 0 0 1 6 -1" fill="none" stroke="#c3c9cd" stroke-width="1.5"/>
+                <circle cx="425" cy="496" r="7" fill="#3d4347" stroke="#5d656b" stroke-width="1.5"/>
+                <g class="waves" fill="none" stroke-linecap="round">
+                  <path d="M462 424 a12 12 0 0 1 0 20"/>
+                  <path d="M470 416 a22 22 0 0 1 0 36"/>
+                  <path d="M478 408 a32 32 0 0 1 0 52"/>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <figcaption class="xp__read" aria-live="polite">
+          <span class="xp__name" id="xp-name">Point at a part to see the job</span>
+          <span class="xp__desc" id="xp-desc"></span>
+        </figcaption>
+        <p class="bay__plate" aria-hidden="true">
+          <span class="bay__word" data-i18n="ui.garage">Garage</span>
+          <span class="bay__num">13</span>
+        </p>
+      </figure>
     </div>
   </section>
 
@@ -177,7 +340,7 @@
           <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z" fill="currentColor"/></svg>
           <span data-i18n="ctas.call">Call +374 98 828211</span>
         </a>
-        <a class="btn btn--steel btn--big btn--block" href="https://www.google.com/maps/search/?api=1&amp;query=Garage%20Masters%20Mall%2C%20Mazmanyan%201%2C%20Yerevan" target="_blank" rel="noopener">
+        <a class="btn btn--steel btn--big btn--block" href="https://yandex.com/maps/?text=Mazmanyan%201%2C%20Garage%20Masters%27%20Mall%2C%20Yerevan" target="_blank" rel="noopener">
           <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" fill="currentColor"/></svg>
           <span data-i18n="ctas.directions">Get directions</span>
         </a>
@@ -221,6 +384,7 @@
     <p data-i18n="footer.address">Mazmanyan 1, Garage Masters' Mall, garage 13, Yerevan</p>
     <p><a href="tel:+37498828211">+374 98 828211</a> <span aria-hidden="true">/</span> <a href="https://wa.me/37477020404" target="_blank" rel="noopener">WhatsApp +374 77 020404</a></p>
     <p class="foot__small">&copy; <span id="year">2026</span> CG Service. <span data-i18n="footer.rights">All rights reserved.</span></p>
+    <p class="foot__demo" data-i18n="footer.demo">This is a demo website.</p>
   </div>
 </footer>
 
@@ -230,7 +394,7 @@
     <span data-i18n="ui.dockCall">Call</span>
   </a>
   <a href="https://wa.me/37477020404" target="_blank" rel="noopener">WhatsApp</a>
-  <a href="https://www.google.com/maps/search/?api=1&amp;query=Garage%20Masters%20Mall%2C%20Mazmanyan%201%2C%20Yerevan" target="_blank" rel="noopener" data-i18n="ui.dockRoute">Route</a>
+  <a href="https://yandex.com/maps/?text=Mazmanyan%201%2C%20Garage%20Masters%27%20Mall%2C%20Yerevan" target="_blank" rel="noopener" data-i18n="ui.dockRoute">Route</a>
 </nav>
 
 <script src="js/main.js"></script>

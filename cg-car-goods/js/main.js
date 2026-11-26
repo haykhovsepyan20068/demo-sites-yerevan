@@ -31,6 +31,9 @@
       'ctas.facebook': 'Visit us on Facebook',
       'footer.tagline': 'CG Car Goods: car accessories, parts, car cosmetics and auto chemicals in Yerevan.',
       'footer.rights': 'All rights reserved.',
+      'footer.demo': 'This is a demo website.',
+      'ui.rackTitle': 'Store shelf: point at a product to see its section',
+      'ui.rackHint': 'Point at or tap a product to see its section',
       'ui.skip': 'Skip to content',
       'ui.navCatalog': 'Catalog', 'ui.navAbout': 'About', 'ui.navWhy': 'Why us', 'ui.navVisit': 'Visit',
       'ui.menu': 'Menu',
@@ -68,6 +71,9 @@
       'ctas.facebook': 'Մեր էջը Facebook-ում',
       'footer.tagline': 'CG Car Goods՝ ավտոաքսեսուարներ, պահեստամասեր, ավտոկոսմետիկա և ավտոքիմիա Երևանում։',
       'footer.rights': 'Բոլոր իրավունքները պաշտպանված են։',
+      'footer.demo': 'Սա դեմո կայք է։',
+      'ui.rackTitle': 'Խանութի դարակ՝ մատնանշեք ապրանքը՝ բաժինը տեսնելու համար',
+      'ui.rackHint': 'Մատնանշեք կամ հպեք ապրանքին՝ բաժինը տեսնելու համար',
       'ui.skip': 'Անցնել բովանդակությանը',
       'ui.navCatalog': 'Տեսականի', 'ui.navAbout': 'Մեր մասին', 'ui.navWhy': 'Ինչու մենք', 'ui.navVisit': 'Հասցե',
       'ui.menu': 'Մենյու',
@@ -109,7 +115,135 @@
       langBtns[j].setAttribute('aria-pressed', String(langBtns[j].getAttribute('data-lang') === lang));
     }
     try { localStorage.setItem('cgcg-lang', lang); } catch (e) {}
+    if (rack) rack.relabel(d);
   }
+
+  var rack = null;
+
+  // Hero shelf: hover / tap / keyboard highlights a product and pops up its section name
+  (function initRack() {
+    var svg = document.querySelector('.rack-svg');
+    if (!svg) return;
+    var wrap = document.getElementById('rack');
+    var zones = svg.querySelectorAll('.zone');
+    var call = svg.querySelector('.callout');
+    var callBg = call.querySelector('.callout__bg');
+    var callText = call.querySelector('.callout__text');
+    var dict = T.en, active = null, pinned = false;
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function zoneOf(slot) { return slot.closest('.zone'); }
+    function catName(zone) { return dict['cat.' + zone.getAttribute('data-cat')] || ''; }
+    function place(slot) {
+      var m = slot.transform.baseVal.consolidate().matrix;
+      var bb = slot.querySelector('.sku__body').getBBox();
+      var cx = m.e + bb.x + bb.width / 2;
+      var top = m.f + bb.y - 18;
+      callText.textContent = catName(zoneOf(slot));
+      var cs = parseFloat(getComputedStyle(call).getPropertyValue('--cs')) || 1;
+      var w = Math.ceil(callText.getComputedTextLength()) + 26;
+      var half = w / 2;
+      var x = Math.max(half * cs + 4, Math.min(600 - half * cs - 4, cx));
+      var tip = Math.max(-half + 10, Math.min(half - 10, (cx - x) / cs));
+      callBg.setAttribute('d', 'M' + (-half) + ' -30 H' + half + ' V0 H' + (tip + 8) + ' L' + tip + ' 9 L' + (tip - 8) + ' 0 H' + (-half) + 'z');
+      call.setAttribute('transform', 'translate(' + x.toFixed(1) + ' ' + Math.max(30 * cs + 2, top).toFixed(1) + ')');
+    }
+    function clear() {
+      if (active) { active.classList.remove('is-on'); zoneOf(active).classList.remove('is-on'); }
+      active = null;
+      call.classList.remove('is-on');
+    }
+    function activate(slot) {
+      if (active === slot) return;
+      clear();
+      if (!slot) return;
+      active = slot;
+      slot.classList.add('is-on');
+      zoneOf(slot).classList.add('is-on');
+      place(slot);
+      requestAnimationFrame(function () { call.classList.add('is-on'); });
+    }
+    function openDrawer(zone) {
+      var front = document.querySelector('.drawer[data-cat="' + zone.getAttribute('data-cat') + '"] .drawer__front');
+      if (!front) return;
+      if (front.getAttribute('aria-expanded') !== 'true') front.click();
+      front.closest('.drawer').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+      front.focus({ preventScroll: true });
+    }
+
+    svg.addEventListener('pointerover', function (e) {
+      if (e.pointerType === 'touch') return;
+      var slot = e.target.closest && e.target.closest('.slot');
+      if (slot) { pinned = false; activate(slot); }
+    });
+    svg.addEventListener('pointerleave', function (e) { if (e.pointerType !== 'touch' && !pinned) clear(); });
+    svg.addEventListener('click', function (e) {
+      var zone = e.target.closest('.zone');
+      if (!zone) { pinned = false; clear(); return; }
+      var slot = e.target.closest('.slot') || (zone.contains(active) ? active : zone.querySelector('.slot'));
+      // mouse click opens the section; on touch the first tap highlights, a second tap on the same product opens its section below
+      if (e.pointerType === 'mouse' || (active === slot && pinned)) { activate(slot); openDrawer(zone); return; }
+      pinned = true;
+      activate(slot);
+    });
+    document.addEventListener('pointerdown', function (e) { if (pinned && !svg.contains(e.target)) { pinned = false; clear(); } });
+
+    for (var z = 0; z < zones.length; z++) {
+      zones[z].addEventListener('focus', function () { if (!this.contains(active)) activate(this.querySelector('.slot')); });
+      zones[z].addEventListener('blur', function () { if (!pinned) clear(); });
+      zones[z].addEventListener('keydown', function (e) {
+        var slots = this.querySelectorAll('.slot');
+        var i = Array.prototype.indexOf.call(slots, active);
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+          e.preventDefault();
+          i = (i + (e.key === 'ArrowRight' ? 1 : slots.length - 1)) % slots.length;
+          activate(slots[i]);
+        } else if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openDrawer(this);
+        } else if (e.key === 'Escape') { pinned = false; clear(); }
+      });
+    }
+
+    // gentle tilt toward the cursor (fine pointers only)
+    if (!reduce && window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      var hero = document.querySelector('.hero'), raf = 0, px = 0, py = 0;
+      hero.addEventListener('pointermove', function (e) {
+        var r = wrap.getBoundingClientRect();
+        px = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / r.width));
+        py = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height / 2)) / r.height));
+        if (!raf) raf = requestAnimationFrame(function () {
+          raf = 0;
+          wrap.style.setProperty('--ry', (px * 5).toFixed(2));
+          wrap.style.setProperty('--rx', (-py * 3.5).toFixed(2));
+        });
+      });
+      hero.addEventListener('pointerleave', function () { wrap.style.setProperty('--ry', 0); wrap.style.setProperty('--rx', 0); });
+    }
+
+    function fitTags() {
+      var tags = svg.querySelectorAll('.shelf-tag');
+      for (var t = 0; t < tags.length; t++) {
+        var txt = tags[t].querySelector('text');
+        var len = txt.getComputedTextLength();
+        if (len) tags[t].querySelector('rect').setAttribute('width', Math.ceil(len) + 14);
+      }
+    }
+    var sk = svg.querySelectorAll('.sku');
+    for (var n = 0; n < sk.length; n++) sk[n].style.setProperty('--i', n);
+    var st = svg.querySelectorAll('.shelf-tag');
+    for (var k = 0; k < st.length; k++) st[k].style.setProperty('--t', k);
+
+    rack = {
+      relabel: function (d) {
+        dict = d;
+        for (var z2 = 0; z2 < zones.length; z2++) zones[z2].setAttribute('aria-label', catName(zones[z2]));
+        fitTags();
+        if (active) place(active);
+      }
+    };
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { fitTags(); if (active) place(active); });
+  })();
 
   var menuBtn = document.querySelector('.menu');
   var nav = document.getElementById('nav');
@@ -165,12 +299,6 @@
       }
     });
   }
-
-  // Rack load sequence: stagger indices
-  var items = document.querySelectorAll('.rack .item');
-  for (var n = 0; n < items.length; n++) items[n].style.setProperty('--i', n);
-  var tags = document.querySelectorAll('.rack .tag');
-  for (var t = 0; t < tags.length; t++) tags[t].style.setProperty('--t', t);
 
   // Decorative barcode derived from the phone number
   var svg = document.querySelector('.barcode');

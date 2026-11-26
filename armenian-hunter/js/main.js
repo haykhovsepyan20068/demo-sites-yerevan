@@ -26,7 +26,12 @@
       ariaMenu: { en: 'Menu', hy: 'Ընտրացանկ' },
       ariaLang: { en: 'Language', hy: 'Լեզու' },
       ariaCallAhead: { en: 'Call ahead', hy: 'Զանգահարեք նախօրոք' },
-      ariaDock: { en: 'Quick actions', hy: 'Արագ գործողություններ' }
+      ariaDock: { en: 'Quick actions', hy: 'Արագ գործողություններ' },
+      ariaScene: { en: 'Highland forest illustration', hy: 'Լեռնային անտառի պատկեր' },
+      ariaMouflon: { en: 'Mouflon on the ridge', hy: 'Մուֆլոնը լեռնաշղթայի վրա' },
+      ariaForest: { en: 'Fir forest', hy: 'Եղևնու անտառ' },
+      ariaCompass: { en: 'Compass', hy: 'Կողմնացույց' },
+      demo: { en: 'This is a demo website.', hy: 'Սա դեմո կայք է։' }
     }
   };
 
@@ -160,12 +165,12 @@
     return 'url("data:image/svg+xml,' + encodeURIComponent(out) + '")';
   }
   root.style.setProperty('--camo-woodland', camoTile(1908, 520, ['#5d6534', '#8a9459', '#5b3f2a', '#1c2618']));
+  /* muted page-wide camo: same woodland logic, low-contrast dark tones so text plates stay readable */
+  root.style.setProperty('--camo-page', camoTile(808, 640, ['#2b3423', '#3a4529', '#35291d', '#1d2518']));
 
-  /* ---------------- hero: topographic map + trail to the shop ---------------- */
+  /* ---------------- hero: topographic contours in the sky ---------------- */
   var topo = document.getElementById('topo');
   var linesG = document.getElementById('topo-lines');
-  var trail = document.getElementById('trail');
-  var pin = document.getElementById('pin');
 
   function drawTopo(animate) {
     if (!topo) return;
@@ -174,7 +179,7 @@
     topo.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
     while (linesG.firstChild) linesG.removeChild(linesG.firstChild);
     var r = rng(77);
-    var pinX = narrow ? w * 0.2 : w * 0.76, pinY = narrow ? 120 : h * 0.66;
+    var pinX = narrow ? w * 0.2 : w * 0.76, pinY = narrow ? 120 : h * 0.3;
     var hills = [
       { x: pinX + (narrow ? 30 : 40), y: pinY - (narrow ? 10 : 30), rings: narrow ? 9 : 13, step: narrow ? 22 : 30 },
       { x: w * (narrow ? 0.9 : 0.42), y: h * (narrow ? 0.62 : 0.12), rings: 10, step: narrow ? 24 : 34 },
@@ -201,19 +206,6 @@
         idx++;
       }
     });
-    /* trail winding from the lower-left edge to the shop pin */
-    var start = narrow ? [-20, h * 0.32] : [-20, h * 0.92];
-    var pts = [start];
-    var steps = 6;
-    for (var s = 1; s < steps; s++) {
-      var t = s / steps;
-      pts.push([start[0] + (pinX - start[0]) * t + (r() - 0.5) * (narrow ? 30 : 90),
-                start[1] + (pinY - start[1]) * t + Math.sin(t * Math.PI * 2) * (narrow ? 20 : 50)]);
-    }
-    pts.push([pinX, pinY]);
-    trail.setAttribute('d', openPath(pts));
-    document.getElementById('pin-at').setAttribute('transform', 'translate(' + pinX.toFixed(1) + ' ' + pinY.toFixed(1) + ')');
-    if (!animate) { trail.style.animation = 'none'; trail.style.opacity = '.95'; pin.style.animation = 'none'; pin.style.opacity = '1'; }
   }
   drawTopo(!reduceMotion);
   var lastW = window.innerWidth, rt;
@@ -224,6 +216,96 @@
       lastW = window.innerWidth; drawTopo(false);
     }, 200);
   });
+
+  /* ---------------- highland scene: firs, eye-shine, compass, interaction ---------------- */
+  (function scene() {
+    var svg = document.getElementById('scene');
+    if (!svg) return;
+    var r = rng(4108);
+    function fir(x, base, h, w, col) {
+      var tiers = 5, d = '';
+      for (var t = 0; t < tiers; t++) {
+        var top = base - h + t * h * 0.17, bot = top + h * 0.34;
+        var hw = w * (0.32 + 0.68 * t / (tiers - 1)) / 2;
+        d += 'M' + x.toFixed(1) + ' ' + top.toFixed(1) + 'L' + (x + hw).toFixed(1) + ' ' + bot.toFixed(1) +
+          'Q' + x.toFixed(1) + ' ' + (bot - h * 0.05).toFixed(1) + ' ' + (x - hw).toFixed(1) + ' ' + bot.toFixed(1) + 'Z';
+      }
+      return '<g class="fir" style="--sw:' + (r() * 1.2).toFixed(2) + 's"><rect x="' + (x - w * 0.04).toFixed(1) + '" y="' + (base - h * 0.06).toFixed(1) + '" width="' + (w * 0.08).toFixed(1) + '" height="' + (h * 0.12).toFixed(1) + '" fill="#2a1d12"/><path d="' + d + '" fill="' + col + '"/></g>';
+    }
+    /* back row lighter, front row darker; leave a clearing around the compass */
+    var html = '', x;
+    for (x = 10; x < 1220; x += 34 + r() * 30) {
+      if (x > 1010 && x < 1200) continue;
+      var hb = 90 + r() * 60; if (x > 870 && x < 1050) hb = Math.min(hb, 92);
+      html += fir(x, 452 + r() * 12, hb, 46 + r() * 16, r() > .5 ? '#2f4a22' : '#34502a');
+    }
+    for (x = -10; x < 1220; x += 52 + r() * 48) {
+      if (x > 1000) continue;
+      var hf = 130 + r() * 90; if (x > 860 && x < 1060) hf = Math.min(hf, 140);
+      html += fir(x, 500 + r() * 14, hf, 64 + r() * 24, r() > .5 ? '#1c2c17' : '#223519');
+    }
+    document.getElementById('firs').innerHTML = html;
+    /* eye-shine pairs hidden among the trunks */
+    var eyes = [[190, 470], [560, 486], [905, 466]], eh = '';
+    eyes.forEach(function (e, i) {
+      eh += '<g class="eyes__pair" style="--ed:' + (i * 0.18) + 's"><circle class="eye" cx="' + e[0] + '" cy="' + e[1] + '" r="2.6"/><circle class="eye" cx="' + (e[0] + 11) + '" cy="' + e[1] + '" r="2.6"/></g>';
+    });
+    document.getElementById('eyes').innerHTML = eh;
+    /* compass ticks */
+    var tk = '';
+    for (var a = 0; a < 360; a += 10) {
+      var rad = a * Math.PI / 180, r1 = a % 90 === 0 ? 46 : (a % 30 === 0 ? 52 : 56);
+      tk += '<line x1="' + (Math.sin(rad) * r1).toFixed(1) + '" y1="' + (-Math.cos(rad) * r1).toFixed(1) + '" x2="' + (Math.sin(rad) * 60).toFixed(1) + '" y2="' + (-Math.cos(rad) * 60).toFixed(1) + '"/>';
+    }
+    document.getElementById('compass-ticks').innerHTML = tk;
+
+    /* hover / focus light parts via CSS; tap or Enter/Space toggles a sticky "lit" state */
+    var zones = svg.querySelectorAll('.hz');
+    zones.forEach(function (z) {
+      function toggle() {
+        var on = !z.classList.contains('is-lit');
+        z.classList.toggle('is-lit', on);
+        z.setAttribute('aria-pressed', String(on));
+      }
+      z.addEventListener('click', toggle);
+      z.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+      });
+    });
+
+    if (reduceMotion) return;
+    /* parallax + compass needle following the pointer */
+    var hero = svg.closest('.hero'), layers = svg.querySelectorAll('.layer');
+    var needle = document.getElementById('needle'), compass = document.getElementById('hz-compass');
+    var tx = 0, ty = 0, cx = 0, cy = 0, ang = 0, tang = 0, raf = 0, idle = true, t0 = performance.now();
+    hero.addEventListener('pointermove', function (e) {
+      var b = hero.getBoundingClientRect();
+      tx = ((e.clientX - b.left) / b.width) * 2 - 1;
+      ty = ((e.clientY - b.top) / b.height) * 2 - 1;
+      var cb = compass.getBoundingClientRect();
+      tang = Math.atan2(e.clientX - (cb.left + cb.width / 2), -(e.clientY - (cb.top + cb.height / 2))) * 180 / Math.PI;
+      idle = false; kick();
+    });
+    hero.addEventListener('pointerleave', function () { tx = ty = 0; idle = true; kick(); });
+    function kick() { if (!raf) raf = requestAnimationFrame(step); }
+    function step(now) {
+      raf = 0;
+      cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
+      layers.forEach(function (l) {
+        var d = +l.getAttribute('data-depth');
+        l.setAttribute('transform', 'translate(' + (-cx * d).toFixed(2) + ' ' + (-cy * d * 0.4).toFixed(2) + ')');
+      });
+      var target = idle ? Math.sin((now - t0) / 900) * 14 : tang;
+      var diff = ((target - ang + 540) % 360) - 180;
+      ang += diff * 0.1;
+      needle.setAttribute('transform', 'rotate(' + ang.toFixed(2) + ')');
+      if (idle || Math.abs(tx - cx) > .001 || Math.abs(ty - cy) > .001 || Math.abs(diff) > .05) raf = requestAnimationFrame(step);
+    }
+    /* idle needle wobble only while the hero is on screen */
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) { if (en[0].isIntersecting) kick(); else if (raf) { cancelAnimationFrame(raf); raf = 0; } }).observe(hero);
+    } else kick();
+  })();
 
   /* ---------------- pine sprig over the bark ---------------- */
   (function sprig() {
@@ -264,7 +346,7 @@
       }
     });
     html += '<path d="M-10 380 C 80 360 120 300 190 290 S 260 240 300 210" fill="none" stroke="#ff6a13" stroke-width="3.5" stroke-dasharray="2 10" stroke-linecap="round"/>';
-    html += '<g transform="translate(300 210)"><circle r="30" fill="#ff6a13" fill-opacity=".18"/><path d="M0 -6 C -14 -6 -18 -30 0 -40 C 18 -30 14 -6 0 -6 Z" transform="translate(0 6)" fill="#1c2618"/><circle cx="0" cy="-20" r="5" fill="#ff6a13"/></g>';
+    html += '<g class="mm-pin" transform="translate(300 210)"><circle r="30" fill="#ff6a13" fill-opacity=".18"/><path d="M0 -6 C -14 -6 -18 -30 0 -40 C 18 -30 14 -6 0 -6 Z" transform="translate(0 6)" fill="#1c2618"/><circle cx="0" cy="-20" r="5" fill="#ff6a13"/></g>';
     svg.innerHTML = html;
   })();
 

@@ -200,6 +200,39 @@ html[lang="hy"] .hero__title { font-size: clamp(2.3rem, 5.6vw, 5.2rem); line-hei
 }
 .plate__phone:hover { color: var(--flare); }
 
+/* ---------- Hero kit illustration ---------- */
+.hero__side { display: grid; gap: 30px; justify-items: stretch; }
+.hero__art { margin: 0 -10px 0 0; position: relative; touch-action: manipulation; }
+.hero__art svg { width: 100%; height: auto; overflow: visible; }
+.layer {
+  transform: translate(calc(var(--px, 0) * var(--d) * 1px), calc(var(--py, 0) * var(--d) * 1px));
+  transition: transform .25s ease-out;
+}
+.kit { cursor: pointer; outline: none; --glow: var(--flare); }
+.kit--wear { --glow: #5C78FF; }
+.kit__body {
+  transform-box: fill-box; transform-origin: 50% 60%;
+  transition: transform .35s cubic-bezier(.34, 1.56, .64, 1), filter .25s ease;
+}
+.kit:hover .kit__body, .kit:focus-visible .kit__body, .kit.is-lit .kit__body {
+  filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 10px var(--glow)) drop-shadow(0 0 22px var(--glow));
+}
+/* motion layered on top of the base SVG transform via the CSS "rotate"/"translate" properties */
+.kit--shoe .kit__body, .kit--wear .kit__body, .kit--ball .kit__body { rotate: 0deg; translate: 0 0; transition-property: rotate, translate, filter; }
+.kit--shoe:hover .kit__body, .kit--shoe:focus-visible .kit__body, .kit--shoe.is-lit .kit__body { rotate: -6deg; translate: 6px -8px; }
+.kit--wear:hover .kit__body, .kit--wear:focus-visible .kit__body, .kit--wear.is-lit .kit__body { rotate: 7deg; translate: 0 -6px; }
+.kit--ball:hover .kit__body, .kit--ball:focus-visible .kit__body, .kit--ball.is-lit .kit__body { rotate: 40deg; translate: 0 -10px; }
+
+/* the store-lane icons light up too */
+.lane__ico { transition: filter .25s ease, rotate .35s cubic-bezier(.34, 1.56, .64, 1); }
+.lane:hover .lane__ico, .lane.is-lit .lane__ico { rotate: -8deg; filter: drop-shadow(0 0 8px currentColor) drop-shadow(0 0 16px var(--flare)); }
+.lane--shoe:hover .lane__ico, .lane--shoe.is-lit .lane__ico { filter: drop-shadow(0 0 8px #fff) drop-shadow(0 0 16px var(--cobalt)); }
+
+@media (prefers-reduced-motion: reduce) {
+  .layer { transform: none !important; }
+  .kit .kit__body, .lane .lane__ico { rotate: 0deg !important; translate: 0 0 !important; }
+}
+
 /* ---------- Tape ---------- */
 /* wrapper clips the rotated tape horizontally so it never widens the page */
 .tape-wrap {
@@ -323,6 +356,8 @@ html[lang="hy"] .hero__title { font-size: clamp(2.3rem, 5.6vw, 5.2rem); line-hei
 .foot { background: var(--ink); color: rgba(255,255,255,.8); }
 .foot__in { max-width: var(--max); margin: 0 auto; padding: 32px var(--pad); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 32px; font-size: .95rem; }
 
+.foot__demo { flex-basis: 100%; color: #fff; font-weight: 700; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.2); }
+
 .burger { display: none; }
 
 /* ---------- Mobile dock ---------- */
@@ -337,6 +372,8 @@ html[lang="hy"] .hero__title { font-size: clamp(2.3rem, 5.6vw, 5.2rem); line-hei
   .hero { grid-template-columns: 1fr; min-height: 0; }
   .hero::before { clip-path: polygon(100% 52%, 100% 100%, 0 100%, 0 86%); }
   .hero::after { clip-path: polygon(100% 50.6%, 100% 51.6%, 0 85.6%, 0 84.6%); }
+  .hero__side { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 28px; }
+  .hero__art { margin: 0; }
   .hero__plate { max-width: 440px; justify-self: end; margin-right: 12px; }
   .stair { grid-template-columns: 1fr 1fr; }
   .lane--gear { grid-column: 1 / -1; margin: 0 0 0 0; min-height: 260px; }
@@ -372,6 +409,8 @@ html[lang="hy"] .hero__title { font-size: clamp(2.3rem, 5.6vw, 5.2rem); line-hei
   .hero { padding-top: 32px; gap: 32px; }
   .hero__sub { font-size: 1.05rem; }
   .hero__cta .btn { flex: 1 1 220px; }
+  .hero__side { grid-template-columns: 1fr; }
+  .hero__art { width: 100%; max-width: 380px; justify-self: center; }
   .hero__plate { justify-self: stretch; margin: 0 10px 0 4px; max-width: none; box-shadow: 8px 8px 0 var(--ink); }
   .tape-wrap { margin-top: -60px; }
   .stair { grid-template-columns: 1fr; gap: 14px; }

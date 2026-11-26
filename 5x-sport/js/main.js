@@ -172,7 +172,9 @@
     "ui.hours": { en: "Hours", hy: "Ժամեր" },
     "ui.where": { en: "Where", hy: "Հասցե" },
     "ui.menu": { en: "Menu", hy: "Ընտրացանկ" },
-    "ui.details": { en: "Store details", hy: "Խանութի տվյալներ" }
+    "ui.details": { en: "Store details", hy: "Խանութի տվյալներ" },
+    "ui.kit": { en: "Sportswear, footwear and equipment", hy: "Սպորտային հագուստ, կոշիկ և պարագաներ" },
+    "ui.demo": { en: "This is a demo website.", hy: "Սա դեմո կայք է։" }
   };
   C.cat0 = C.categories[0].name;
   C.cat1 = C.categories[1].name;
@@ -240,5 +242,46 @@
   function onScroll() { top.classList.toggle("is-scrolled", window.scrollY > 12); }
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
+
+  // hero kit: light up on hover / focus / tap, gentle parallax toward the cursor
+  var art = document.getElementById("kitArt");
+  var kits = document.querySelectorAll(".kit");
+  function light(el, group) {
+    var was = el.classList.contains("is-lit");
+    group.forEach(function (k) { k.classList.remove("is-lit"); });
+    if (!was) el.classList.add("is-lit");
+  }
+  kits.forEach(function (k) {
+    k.addEventListener("pointerup", function (e) { if (e.pointerType !== "mouse") light(k, kits); });
+    k.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); light(k, kits); }
+    });
+    k.addEventListener("blur", function () { k.classList.remove("is-lit"); });
+  });
+  var lanes = document.querySelectorAll(".lane");
+  lanes.forEach(function (l) {
+    l.addEventListener("pointerup", function (e) { if (e.pointerType !== "mouse") light(l, lanes); });
+  });
+
+  var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var hero = document.querySelector(".hero");
+  if (art && hero && !still) {
+    var raf = 0;
+    hero.addEventListener("pointermove", function (e) {
+      if (e.pointerType !== "mouse") return;
+      var r = art.getBoundingClientRect();
+      var x = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (r.width)));
+      var y = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height / 2)) / (r.height)));
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(function () {
+        art.style.setProperty("--px", x.toFixed(3));
+        art.style.setProperty("--py", y.toFixed(3));
+      });
+    });
+    hero.addEventListener("pointerleave", function () {
+      art.style.setProperty("--px", 0);
+      art.style.setProperty("--py", 0);
+    });
+  }
 
 })();

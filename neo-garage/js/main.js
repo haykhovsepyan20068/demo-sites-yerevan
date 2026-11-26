@@ -77,6 +77,37 @@
     window.matchMedia("(min-width: 1021px)").addEventListener("change", function (m) { if (m.matches) closeMenu(); });
   }
 
+  /* Hero art: tap / Enter charges the pack, mouse tilts the art */
+  var art = document.querySelector(".art");
+  if (art) {
+    var hits = art.querySelectorAll("[data-charge]");
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+    var setOn = function (on) {
+      art.classList.toggle("is-on", on);
+      hits.forEach(function (h) { h.setAttribute("aria-pressed", String(on)); });
+    };
+    hits.forEach(function (h) {
+      h.addEventListener("click", function () { setOn(!art.classList.contains("is-on")); });
+      h.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setOn(!art.classList.contains("is-on")); }
+      });
+    });
+    art.addEventListener("pointermove", function (e) {
+      if (e.pointerType !== "mouse" || reduce.matches) return;
+      var r = art.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - 0.5;
+      var y = (e.clientY - r.top) / r.height - 0.5;
+      art.classList.add("is-tracking");
+      art.style.setProperty("--ry", (x * 14).toFixed(2) + "deg");
+      art.style.setProperty("--rx", (-y * 10).toFixed(2) + "deg");
+    });
+    art.addEventListener("pointerleave", function () {
+      art.classList.remove("is-tracking");
+      art.style.setProperty("--ry", "0deg");
+      art.style.setProperty("--rx", "0deg");
+    });
+  }
+
   var year = document.querySelector(".js-year");
   if (year) year.textContent = String(new Date().getFullYear());
 

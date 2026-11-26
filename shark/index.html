@@ -71,16 +71,112 @@
     <div class="hero__grain" aria-hidden="true"></div>
     <p class="hero__side" aria-hidden="true"><span data-i18n="hero.side">Beknazaryan 38/12, Ajapnyak, Yerevan</span></p>
 
-    <div class="hero__stage" aria-hidden="true">
-      <div class="mark">
-        <span class="mark__word">SHARK</span>
-        <svg class="fin" viewBox="0 0 200 140" preserveAspectRatio="xMidYMax meet">
-          <path d="M6 138 C58 120 98 70 112 4 C130 60 160 108 196 138 Z"/>
-        </svg>
-        <svg class="wake" viewBox="0 0 1000 40" preserveAspectRatio="none">
-          <path d="M0 20 Q 60 6 120 20 T 240 20 T 360 20 T 480 20 T 600 20 T 720 20 T 840 20 T 960 20 T 1080 20"/>
-        </svg>
-      </div>
+    <div class="hero__stage">
+      <svg class="scene" viewBox="0 0 1200 580" role="group" aria-label="Shark Gym: barbell, dumbbell and shark fin" data-i18n-aria="aria.scene" focusable="false">
+        <defs>
+          <linearGradient id="sc-water" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#183646" stop-opacity=".78"/>
+            <stop offset=".7" stop-color="#0B1D28" stop-opacity=".9"/>
+            <stop offset="1" stop-color="#0B1D28" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="sc-fin" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#3E5E70"/>
+            <stop offset=".55" stop-color="#23404F"/>
+            <stop offset="1" stop-color="#142C39"/>
+          </linearGradient>
+          <linearGradient id="sc-plate" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#1A3442"/>
+            <stop offset=".45" stop-color="#2C4B5C"/>
+            <stop offset="1" stop-color="#152C38"/>
+          </linearGradient>
+          <linearGradient id="sc-steel" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#E3E8EA"/>
+            <stop offset=".5" stop-color="#9AAEB9"/>
+            <stop offset="1" stop-color="#5E7684"/>
+          </linearGradient>
+          <pattern id="sc-knurl" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <rect width="6" height="6" fill="#8FA4B0"/>
+            <path d="M0 0H6M0 0V6" stroke="#5E7684" stroke-width="1.4"/>
+          </pattern>
+          <clipPath id="sc-above"><rect x="0" y="0" width="1200" height="338"/></clipPath>
+        </defs>
+
+        <!-- Gym wall ticks: lifting chalk marks behind the word -->
+        <g class="scene__grid" aria-hidden="true">
+          <path d="M60 60H1140M60 120H1140M60 180H1140M60 240H1140M60 300H1140"/>
+        </g>
+
+        <!-- Mark: SHARK, half under water -->
+        <g class="scene__word layer" data-depth="6" aria-hidden="true">
+          <text x="600" y="426" text-anchor="middle" textLength="1130" lengthAdjust="spacingAndGlyphs">SHARK</text>
+        </g>
+
+        <!-- Fin: cuts the water, glows on hover -->
+        <g class="layer" data-depth="18">
+          <g class="fin-swim">
+            <g class="part part--fin" tabindex="0" role="img" aria-label="Shark fin" data-i18n-aria="aria.fin">
+              <g clip-path="url(#sc-above)">
+                <path class="fin__body" d="M560 352 C632 320 690 250 712 108 C724 102 732 104 738 112 C748 210 790 292 862 352 Z"/>
+                <path class="fin__edge" d="M712 108 C724 102 732 104 738 112 C748 210 790 292 862 352"/>
+                <path class="fin__scar" d="M676 238 l18 10 M664 270 l22 12 M652 300 l24 12"/>
+              </g>
+              <path class="fin__foam" d="M540 340 q14 -10 28 0 t28 0 M842 340 q14 -12 30 0 t30 0 t26 0"/>
+            </g>
+          </g>
+        </g>
+
+        <!-- Water body over the lower half of the word -->
+        <g aria-hidden="true">
+          <rect class="scene__water" x="-2400" y="336" width="6000" height="244" fill="url(#sc-water)"/>
+          <path class="wake" d="M-2400 338 Q -2350 326 -2300 338 T -2200 338 T -2100 338 T -2000 338 T -1900 338 T -1800 338 T -1700 338 T -1600 338 T -1500 338 T -1400 338 T -1300 338 T -1200 338 T -1100 338 T -1000 338 T -900 338 T -800 338 T -700 338 T -600 338 T -500 338 T -400 338 T -300 338 T -200 338 T -100 338 T 0 338 T 100 338 T 200 338 T 300 338 T 400 338 T 500 338 T 600 338 T 700 338 T 800 338 T 900 338 T 1000 338 T 1100 338 T 1200 338 T 1300 338 T 1400 338 T 1500 338 T 1600 338 T 1700 338 T 1800 338 T 1900 338 T 2000 338 T 2100 338 T 2200 338 T 2300 338 T 2400 338 T 2500 338 T 2600 338 T 2700 338 T 2800 338 T 2900 338 T 3000 338 T 3100 338 T 3200 338 T 3300 338 T 3400 338 T 3500 338 T 3600 338"/>
+          <path class="scene__ripple" d="M90 384 q30 -8 60 0 t60 0 M930 400 q30 -8 60 0 t60 0 M470 372 q24 -7 48 0 t48 0"/>
+        </g>
+
+        <!-- Platform -->
+        <g aria-hidden="true">
+          <rect class="scene__floor" x="40" y="548" width="1120" height="16"/>
+          <path class="scene__floor-line" d="M40 548H1160"/>
+        </g>
+
+        <!-- Barbell -->
+        <g class="layer" data-depth="10">
+          <g class="part part--bar" tabindex="0" role="img" aria-label="Loaded barbell" data-i18n-aria="aria.bar">
+            <rect class="bar__shaft" x="130" y="433" width="940" height="14" rx="3"/>
+            <rect x="380" y="433" width="170" height="14" fill="url(#sc-knurl)"/>
+            <rect x="650" y="433" width="170" height="14" fill="url(#sc-knurl)"/>
+            <rect class="bar__shine" x="130" y="435" width="940" height="3"/>
+            <!-- left side, inner to outer -->
+            <rect class="bar__collar" x="300" y="424" width="16" height="32" rx="3"/>
+            <rect class="plate plate--xl" x="262" y="326" width="36" height="228" rx="7"/>
+            <rect class="plate plate--xl" x="222" y="326" width="36" height="228" rx="7"/>
+            <rect class="plate plate--l"  x="190" y="356" width="28" height="168" rx="6"/>
+            <rect class="plate plate--m"  x="166" y="384" width="20" height="112" rx="5"/>
+            <rect class="bar__collar" x="146" y="426" width="16" height="28" rx="3"/>
+            <rect class="bar__sleeve" x="100" y="430" width="44" height="20" rx="4"/>
+            <!-- right side, mirrored -->
+            <rect class="bar__collar" x="884" y="424" width="16" height="32" rx="3"/>
+            <rect class="plate plate--xl" x="902" y="326" width="36" height="228" rx="7"/>
+            <rect class="plate plate--xl" x="942" y="326" width="36" height="228" rx="7"/>
+            <rect class="plate plate--l"  x="982" y="356" width="28" height="168" rx="6"/>
+            <rect class="plate plate--m"  x="1014" y="384" width="20" height="112" rx="5"/>
+            <rect class="bar__collar" x="1038" y="426" width="16" height="28" rx="3"/>
+            <rect class="bar__sleeve" x="1056" y="430" width="44" height="20" rx="4"/>
+            <!-- plate rims -->
+            <path class="plate__rim" d="M280 334V546M240 334V546M204 362V518M176 390V490M920 334V546M960 334V546M996 362V518M1024 390V490"/>
+          </g>
+        </g>
+
+        <!-- Dumbbell on the platform -->
+        <g class="layer" data-depth="14">
+          <g class="part part--bell" tabindex="0" role="img" aria-label="Dumbbell" data-i18n-aria="aria.bell">
+            <rect class="bar__shaft" x="500" y="514" width="200" height="12" rx="3"/>
+            <rect x="560" y="514" width="80" height="12" fill="url(#sc-knurl)"/>
+            <path class="plate plate--hex" d="M478 488 L500 494 V546 L478 548 L456 546 V494 Z"/>
+            <path class="plate plate--hex" d="M722 488 L744 494 V546 L722 548 L700 546 V494 Z"/>
+            <path class="plate__rim" d="M478 494V542M722 494V542"/>
+          </g>
+        </g>
+      </svg>
     </div>
 
     <div class="hero__copy">
@@ -91,7 +187,7 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
           <span data-i18n="hero.cta">Call now</span>
         </a>
-        <a class="btn btn--ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Beknazaryan+St+38%2F12+Yerevan" target="_blank" rel="noopener" data-i18n="ctas.directions">Get directions</a>
+        <a class="btn btn--ghost" href="https://yandex.com/maps/org/145154016418/" target="_blank" rel="noopener" data-i18n="ctas.directions">Get directions</a>
       </div>
     </div>
 
@@ -151,7 +247,7 @@
         <p data-i18n="why.0.desc">Our members rate Shark 4.9 out of 5 on Yandex Maps.</p>
       </article>
       <article class="stat stat--coach">
-        <svg class="stat__fin" viewBox="0 0 200 140" aria-hidden="true"><path d="M6 138 C58 120 98 70 112 4 C130 60 160 108 196 138 Z"/></svg>
+        <svg class="stat__fin" viewBox="0 0 200 140" aria-hidden="true"><path class="stat__fin-body" d="M6 138 C58 120 98 70 112 4 C130 60 160 108 196 138 Z"/><path class="stat__fin-wave" d="M0 136 q12 -6 24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0"/></svg>
         <h3 class="stat__title" data-i18n="why.1.title">Professional instructors</h3>
         <p data-i18n="why.1.desc">Fitness and bodybuilding with professional instructors.</p>
       </article>
@@ -210,7 +306,7 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
           <span data-i18n="ctas.call">Call +374&nbsp;77&nbsp;035550</span>
         </a>
-        <a class="btn btn--ghost btn--xl" href="https://www.google.com/maps/search/?api=1&amp;query=Beknazaryan+St+38%2F12+Yerevan" target="_blank" rel="noopener">
+        <a class="btn btn--ghost btn--xl" href="https://yandex.com/maps/org/145154016418/" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 32" aria-hidden="true"><path d="M12 1C6 1 1.5 5.5 1.5 11.3 1.5 19 12 31 12 31s10.5-12 10.5-19.7C22.5 5.5 18 1 12 1zm0 14.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/></svg>
           <span data-i18n="ctas.directions">Get directions</span>
         </a>
@@ -226,6 +322,7 @@
     <p data-i18n="footer.tagline">Shark Gym. Fitness and bodybuilding in Ajapnyak, Yerevan.</p>
     <p>&copy; <span id="year">2026</span> Shark Gym. <span data-i18n="footer.rights">All rights reserved.</span></p>
   </div>
+  <p class="foot__demo" data-i18n="footer.demo">This is a demo website.</p>
 </footer>
 
 <div class="dock" role="group" aria-label="Quick contact" data-i18n-aria="aria.dock">
@@ -233,7 +330,7 @@
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
     <span data-i18n="hero.cta">Call now</span>
   </a>
-  <a class="dock__map" href="https://www.google.com/maps/search/?api=1&amp;query=Beknazaryan+St+38%2F12+Yerevan" target="_blank" rel="noopener" data-i18n="ctas.directions">Get directions</a>
+  <a class="dock__map" href="https://yandex.com/maps/org/145154016418/" target="_blank" rel="noopener" data-i18n="ctas.directions">Get directions</a>
 </div>
 
 <script src="js/main.js"></script>

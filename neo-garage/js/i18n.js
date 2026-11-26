@@ -45,7 +45,11 @@ window.NG_I18N = {
     "footer.rights": "All rights reserved.",
     "bar.call": "Call",
     "bar.route": "Directions",
-    "bar.label": "Quick actions"
+    "bar.label": "Quick actions",
+    "hero.artLabel": "Charging connector and battery module",
+    "hero.plugLabel": "Connector: show the current",
+    "hero.packLabel": "Battery module: charge the cells",
+    "footer.demo": "This is a demo website."
   },
   hy: {
     "meta.title": "Neo Garage | Էլեկտրամեքենաների սպասարկում Երևանում",
@@ -92,6 +96,10 @@ window.NG_I18N = {
     "footer.rights": "Բոլոր իրավունքները պաշտպանված են։",
     "bar.call": "Զանգ",
     "bar.route": "Երթուղի",
-    "bar.label": "Արագ գործողություններ"
+    "bar.label": "Արագ գործողություններ",
+    "hero.artLabel": "Լիցքավորման միակցիչ և մարտկոցի մոդուլ",
+    "hero.plugLabel": "Միակցիչ՝ ցույց տալ հոսանքը",
+    "hero.packLabel": "Մարտկոցի մոդուլ՝ լիցքավորել բջիջները",
+    "footer.demo": "Սա դեմո կայք է։"
   }
 };

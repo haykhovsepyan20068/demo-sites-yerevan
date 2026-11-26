@@ -199,14 +199,114 @@ html[lang="hy"] .floor__title { font-size: clamp(2.5rem, 6vw, 5.4rem); line-heig
 .floor__sub { margin-top: 24px; max-width: 46ch; font-size: 1.125rem; }
 .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
 
-/* parking bay painted on the floor, garage 13 */
+/* parking bay painted on the floor, garage 13, holding the exploded parts diagram */
 .bay {
   position: relative;
   align-self: stretch;
-  min-height: 340px;
-  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
-  padding: 0 28px 18px;
+  margin: 0;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 0 28px 4px;
 }
+.bay__plate { display: flex; align-items: flex-end; justify-content: center; gap: 14px; margin-top: 14px; }
+
+/* ---------- exploded view ---------- */
+.xp {
+  position: relative;
+  border: 3px solid var(--graphite-dk);
+  box-shadow: 8px 8px 0 rgba(42,45,49,.3);
+  background: #33383c;
+  perspective: 1000px;
+}
+.xp__svg {
+  width: 100%; height: auto;
+  transform: rotateX(var(--ry, 0deg)) rotateY(var(--rx, 0deg));
+  transition: transform .4s cubic-bezier(.2,.7,.2,1);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.xp__guide { fill: none; stroke: #5d656b; stroke-width: 1; stroke-dasharray: 4 6; }
+.xp__axis { fill: none; stroke: #8e969c; stroke-width: 1.2; stroke-dasharray: 6 5; opacity: .7; }
+.hit { fill: transparent; }
+.part { cursor: pointer; outline: none; transition: filter .25s ease; }
+.part__body {
+  transform: translate(calc(var(--px, 0px) + var(--ex, 0px)), calc(var(--py, 0px) + var(--ey, 0px)));
+  transition: transform .45s cubic-bezier(.2,.7,.2,1);
+}
+.part.is-on { --ex: var(--ox); --ey: var(--oy); filter: drop-shadow(0 0 2px #f0c02e) drop-shadow(0 0 10px rgba(240,192,46,.8)); }
+.part:focus-visible .hit { stroke: var(--paint); stroke-width: 2.5; stroke-dasharray: 7 5; }
+.xp.has-on .part:not(.is-on) { opacity: .62; }
+.part { transition: filter .25s ease, opacity .25s ease; }
+
+.spring { stroke: #c3c9cd; stroke-width: 7; paint-order: stroke; filter: drop-shadow(0 0 0 #1d2023) drop-shadow(1px 1px 0 #1d2023); transition: stroke .25s ease; }
+.part--shock.is-on .spring { stroke: var(--paint); }
+
+.bead { stroke: #b98a4a; }
+.part--weld.is-on .bead { stroke: #ffd04a; }
+.sparks { stroke: #ffd04a; fill: #fff3b0; stroke-width: 2; opacity: 0; transition: opacity .2s ease; }
+.part--weld.is-on .sparks { opacity: 1; animation: xp-flicker .35s steps(2, end) infinite; }
+
+.rotor { transform-box: fill-box; transform-origin: center; }
+.part--brake.is-on .rotor { animation: xp-spin 5s linear infinite; }
+.cal-slide { transition: transform .45s cubic-bezier(.2,.7,.2,1); }
+.part--brake.is-on .cal-slide { transform: translate(9px, -11px); }
+
+.spray { fill: #eef3f6; opacity: .25; transition: opacity .25s ease; }
+.part--inj.is-on .spray { opacity: 1; animation: xp-pulse .7s ease-in-out infinite alternate; }
+
+.beam { opacity: 0; transition: opacity .3s ease; }
+.bulb { fill: #d9dcc8; transition: fill .25s ease; }
+.drl { stroke: #c9ccbd; transition: stroke .25s ease; }
+.part--light.is-on .beam { opacity: .9; }
+.part--light.is-on .bulb { fill: #fffbe0; }
+.part--light.is-on .drl { stroke: #fffbe0; }
+
+.led { fill: #6b2a1c; }
+.waves path { stroke: #8e969c; stroke-width: 3; opacity: .3; transition: opacity .25s ease, stroke .25s ease; }
+.part--alarm.is-on .led { fill: #ff5a36; animation: xp-blink 1s steps(2, end) infinite; }
+.part--alarm.is-on .waves path { stroke: var(--paint); opacity: 1; animation: xp-wave 1.2s ease-out infinite; }
+.part--alarm.is-on .waves path:nth-child(2) { animation-delay: .2s; }
+.part--alarm.is-on .waves path:nth-child(3) { animation-delay: .4s; }
+
+@keyframes xp-spin { to { transform: rotate(360deg); } }
+@keyframes xp-flicker { 50% { opacity: .35; } }
+@keyframes xp-pulse { from { opacity: .55; } to { opacity: 1; } }
+@keyframes xp-blink { 50% { fill: #6b2a1c; } }
+@keyframes xp-wave { 0% { opacity: .15; } 50% { opacity: 1; } 100% { opacity: .15; } }
+
+/* readout: a job tag that names the part's service */
+.xp__read {
+  position: relative;
+  margin-top: 14px;
+  min-height: 5.4rem;
+  padding: 12px 16px 12px 46px;
+  color: var(--graphite);
+  background: var(--noise), linear-gradient(175deg, #e1c88f, var(--manila));
+  clip-path: polygon(14px 0, 100% 0, 100% 100%, 14px 100%, 0 50%);
+}
+.xp__read::before {
+  content: ""; position: absolute; left: 18px; top: 50%; width: 14px; height: 14px; margin-top: -7px;
+  border-radius: 50%; background: radial-gradient(circle, #33383c 0 3px, #c9ced1 3.5px 5px, #8d959a 5.5px 7px);
+}
+.xp__name { display: block; font-family: var(--f-display); font-weight: 900; font-size: 1.45rem; line-height: 1.05; }
+.xp__desc { display: block; margin-top: 4px; font-size: .95rem; line-height: 1.4; }
+.xp__read.is-hint .xp__name { font-family: var(--f-body); font-weight: 700; font-size: 1rem; line-height: 1.35; padding-top: 6px; }
+html[lang="hy"] .xp__name { font-stretch: 70%; font-variation-settings: "wdth" 70; font-weight: 800; font-size: 1.3rem; }
+
+/* one orchestrated entrance: parts drop into the bay after the lines are painted */
+.part__body { transform-box: fill-box; transform-origin: center; }
+.js .part__body { opacity: 0; }
+.painted .part__body { animation: xp-in .6s cubic-bezier(.2,.8,.25,1) forwards; }
+.painted .part--brake .part__body { animation-delay: 1.1s; }
+.painted .part--shock .part__body { animation-delay: 1.25s; }
+.painted .part--inj .part__body { animation-delay: 1.35s; }
+.painted .part--weld .part__body { animation-delay: 1.45s; }
+.painted .part--light .part__body { animation-delay: 1.55s; }
+.painted .part--alarm .part__body { animation-delay: 1.65s; }
+@keyframes xp-in { from { opacity: 0; scale: .82; } to { opacity: 1; scale: 1; } }
+
+/* small glow on the job-tag icons too */
+.tag__ico { transition: filter .25s ease, transform .25s ease, stroke .25s ease; }
+.tag__card:hover .tag__ico { stroke: #c2401f; filter: drop-shadow(0 0 5px rgba(240,192,46,.95)); transform: rotate(-6deg) scale(1.08); }
 .bay::before, .bay::after {
   content: ""; position: absolute; top: -200px; bottom: 0; width: 16px;
   background: var(--paint);
@@ -217,12 +317,12 @@ html[lang="hy"] .floor__title { font-size: clamp(2.5rem, 6vw, 5.4rem); line-heig
 .bay__word {
   font-family: var(--f-stencil); font-weight: 800;
   font-size: clamp(1.6rem, 2.6vw, 2.4rem); line-height: 1;
-  color: var(--paint);
-  margin-bottom: 14px;
+  color: var(--graphite);
+  padding-bottom: 6px;
 }
 .bay__num {
   font-family: var(--f-stencil); font-weight: 800;
-  font-size: clamp(9rem, 19vw, 17rem); line-height: .8;
+  font-size: clamp(5rem, 8vw, 7rem); line-height: .8;
   color: var(--paint);
   letter-spacing: -.02em;
   /* worn paint */
@@ -450,7 +550,8 @@ html[lang="hy"] .lane h3 { font-weight: 800; font-size: clamp(1.4rem, 2.2vw, 1.8
 .foot__in { display: grid; gap: 6px; }
 .foot__name { font-family: var(--f-display); font-weight: 900; font-size: 2rem; color: #eceeef; line-height: 1; margin-bottom: 6px; }
 .foot a { color: #eceeef; text-underline-offset: 3px; }
-.foot__small { margin-top: 12px; font-size: .85rem; color: #8d959a; }
+.foot__small { margin-top: 12px; font-size: .85rem; color: #a9b0b5; }
+.foot__demo { margin-top: 10px; padding-top: 10px; border-top: 1px solid #3d4347; font-size: .9rem; color: #e7e9ea; }
 
 /* ---------- mobile dock ---------- */
 .dock { display: none; }
@@ -479,14 +580,9 @@ html[lang="hy"] .lane h3 { font-weight: 800; font-size: clamp(1.4rem, 2.2vw, 1.8
 @media (max-width: 860px) {
   .floor__in { grid-template-columns: 1fr; }
   .floor::before { display: none; }
-  .bay {
-    order: -1; min-height: 0; align-self: start;
-    flex-direction: row; align-items: flex-end; gap: 14px;
-    padding: 0 22px 8px; justify-content: flex-start;
-  }
-  .bay::before, .bay::after { top: -80px; width: 12px; }
-  .bay__num { font-size: clamp(7.5rem, 32vw, 10rem); }
-  .bay__word { order: 2; padding-bottom: 10px; }
+  .bay { width: 100%; max-width: 560px; padding: 0 22px 4px; }
+  .bay::before, .bay::after { top: 0; width: 12px; }
+  .bay__num { font-size: clamp(4.5rem, 20vw, 6rem); }
   .shop__grid, .order__grid { grid-template-columns: 1fr; }
   .sheet { transform: none; margin-top: 20px; }
 }
@@ -520,6 +616,10 @@ html[lang="hy"] .lane h3 { font-weight: 800; font-size: clamp(1.4rem, 2.2vw, 1.8
   .floor__title { font-size: clamp(2.7rem, 12.5vw, 3.6rem); }
   html[lang="hy"] .floor__title { font-size: clamp(2.1rem, 9.6vw, 2.8rem); }
   .sheet__stamp { font-size: 1.15rem; }
+  .bay { padding: 0 16px 4px; }
+  .bay::before, .bay::after { width: 8px; }
+  .xp__read { padding-left: 40px; }
+  .xp__name { font-size: 1.3rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -531,4 +631,14 @@ html[lang="hy"] .lane h3 { font-weight: 800; font-size: clamp(1.4rem, 2.2vw, 1.8
   .painted .paint--1, .painted .paint--thin, .painted .bay::before, .painted .bay::after,
   .painted .bay__num, .painted .bay__word { animation: none; }
   .btn, .burger span, .nav { transition: none; }
+  /* no motion; the glow still marks the active part */
+  .js .part__body { opacity: 1; }
+  .painted .part__body { animation: none; }
+  .xp__svg { transform: none; transition: none; }
+  .part__body, .cal-slide, .tag__ico { transition: none; }
+  .part.is-on { --ex: 0px; --ey: 0px; }
+  .part--brake.is-on .cal-slide { transform: none; }
+  .tag__card:hover .tag__ico { transform: none; }
+  .part--brake.is-on .rotor, .part--weld.is-on .sparks, .part--inj.is-on .spray,
+  .part--alarm.is-on .led, .part--alarm.is-on .waves path { animation: none; }
 }

@@ -150,7 +150,6 @@ html[lang="hy"] .hero__title { font-size: clamp(2.1rem, 1.2rem + 3vw, 3.4rem); l
 /* the pattern sheet */
 .sheet {
   margin: 0; position: relative;
-  transform: rotate(1.4deg);
   box-shadow: 0 1px 0 rgba(51,36,26,.12), 14px 18px 0 -6px rgba(91,70,54,.18);
 }
 .sheet__svg { width: 100%; height: auto; }
@@ -171,6 +170,53 @@ html[lang="hy"] .hero__title { font-size: clamp(2.1rem, 1.2rem + 3vw, 3.4rem); l
 .t-sans { font-family: var(--sans); font-size: 13px; fill: var(--ink-soft); font-weight: 500; }
 .t-small { font-size: 12.5px; }
 .t-tape text { font-family: var(--sans); font-size: 11px; font-weight: 700; fill: var(--ink); }
+.t-coil { font-family: var(--sans); font-size: 10px; font-weight: 700; fill: var(--ink); }
+
+/* ---------- Workbench: interactive tools ---------- */
+.hero__art { min-width: 0; }
+.sheet {
+  --rx: 0; --ry: 0;
+  transform: perspective(1100px) rotateX(calc(var(--ry) * -3deg)) rotateY(calc(var(--rx) * 4deg)) rotate(1.4deg);
+  transition: transform .5s cubic-bezier(.2,.7,.3,1);
+}
+.sheet.is-tracking { transition: transform .12s linear; }
+.layer { transition: transform .5s cubic-bezier(.2,.7,.3,1); }
+.sheet.is-tracking .layer { transition: transform .12s linear; }
+.layer--paper { transform: translate(calc(var(--rx) * -3px), calc(var(--ry) * -2px)); }
+.layer--tools { transform: translate(calc(var(--rx) * 7px), calc(var(--ry) * 5px)); }
+
+.pattern .t-pat, .t-pat { font-size: 18px; }
+.tool--pattern .piece { stroke-width: 2.2; }
+.tool--pattern .stitch { stroke-width: 2.8; }
+.tool--pattern .chalk { stroke-width: 1.8; }
+
+.tool { cursor: pointer; outline: none; -webkit-tap-highlight-color: transparent; }
+.tool__art {
+  transform-box: fill-box; transform-origin: center;
+  transition: transform .3s cubic-bezier(.2,.7,.3,1.4), filter .3s ease;
+}
+.acrylic { fill: rgba(45, 78, 158, .14); stroke: var(--chalk); stroke-width: 1.4; }
+.thread { fill: none; stroke: #2F55B0; stroke-width: 1.4; stroke-linecap: round; }
+.seam { fill: none; stroke: var(--chalk); stroke-width: 2; stroke-dasharray: 6 4.5; stroke-linecap: round; }
+.seam-mask { fill: none; stroke: #fff; stroke-width: 8; stroke-dasharray: 1 1; stroke-dashoffset: 1; transition: stroke-dashoffset .9s cubic-bezier(.4,0,.2,1); }
+
+/* lit = hover, keyboard focus or tap: chalk-blue glow, tool lifts, seam is sewn around it */
+.tool:hover .tool__art, .tool:focus-visible .tool__art, .tool.is-lit .tool__art {
+  filter: drop-shadow(0 0 1.5px rgba(255,255,255,.95)) drop-shadow(0 0 7px rgba(58,98,200,.9)) drop-shadow(0 0 16px rgba(58,98,200,.45));
+  transform: translate(-1px, -3px) scale(1.035);
+}
+.tool--pattern:hover .tool__art, .tool--pattern:focus-visible .tool__art, .tool--pattern.is-lit .tool__art { transform: translate(0, -2px) scale(1.01); }
+.tool:hover .seam-mask, .tool:focus-visible .seam-mask, .tool.is-lit .seam-mask { stroke-dashoffset: 0; }
+.tool:focus-visible .seam { stroke: var(--ink); }
+.bench.has-lit .tool:not(.is-lit):not(:hover):not(:focus-visible) .tool__art { opacity: .78; transition: opacity .3s ease, transform .3s ease; }
+.tool__art { transition: transform .3s cubic-bezier(.2,.7,.3,1.4), filter .3s ease, opacity .3s ease; }
+
+.bench-hint {
+  margin-top: 18px; padding-left: 10px;
+  font-size: .92rem; color: var(--ink-soft);
+  display: flex; align-items: center; gap: 10px;
+}
+.bench-hint::before { content: ""; width: 28px; border-top: 2px dashed var(--chalk); flex: none; }
 
 /* The one orchestrated moment: the seam is sewn on load */
 /* Without JS the seam is shown finished; only .js hides it for the sewing animation */
@@ -321,6 +367,7 @@ html[lang="hy"] .swatch__name { font-size: clamp(1.35rem, 1rem + 1.4vw, 2.1rem);
 .foot { border-top: 1.5px dashed rgba(51,36,26,.35); padding: 28px 0 32px; font-size: .95rem; color: var(--ink-soft); }
 .foot__inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
 .foot__tag { font-family: var(--serif); color: var(--ink); }
+.foot__demo { flex-basis: 100%; margin-top: 10px; padding-top: 12px; border-top: 1px dashed rgba(51,36,26,.28); color: var(--ink); font-size: .9rem; }
 
 /* Armenian glyphs fall back to Noto Serif Armenian; give them matching colour */
 html[lang="hy"] .h2, html[lang="hy"] .hero__title, html[lang="hy"] .swatch__name,
@@ -411,4 +458,7 @@ html[lang="hy"] .dock a { font-size: .92rem; line-height: 1.15; text-align: cent
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .sew { stroke-dashoffset: 0; }
   .needle { display: none; }
+  .sheet { transform: rotate(1.4deg) !important; }
+  .layer { transform: none !important; }
+  .tool:hover .tool__art, .tool:focus-visible .tool__art, .tool.is-lit .tool__art { transform: none; }
 }

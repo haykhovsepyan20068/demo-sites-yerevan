@@ -64,7 +64,8 @@
     footer: {
       tagline: { en: "CG Service. Car repair in Garage Masters' Mall, Yerevan.", hy: "CG Service։ Ավտոնորոգում Երևանում՝ Garage Masters' Mall-ում։" },
       address: { en: "Mazmanyan 1, Garage Masters' Mall, garage 13, Yerevan", hy: "Մազմանյան 1, Garage Masters' Mall, գարաժ 13, Երևան" },
-      rights: { en: "All rights reserved.", hy: "Բոլոր իրավունքները պաշտպանված են։" }
+      rights: { en: "All rights reserved.", hy: "Բոլոր իրավունքները պաշտպանված են։" },
+      demo: { en: "This is a demo website.", hy: "Սա դեմո կայք է։" }
     },
     ui: {
       skip: { en: "Skip to content", hy: "Անցնել բովանդակությանը" },
@@ -80,7 +81,9 @@
       stamp: { en: "Open until 22:00", hy: "Բաց է մինչև 22:00" },
       dockCall: { en: "Call", hy: "Զանգ" },
       dockRoute: { en: "Route", hy: "Երթուղի" },
-      menu: { en: "Menu", hy: "Մենյու" }
+      menu: { en: "Menu", hy: "Մենյու" },
+      xpLabel: { en: "Exploded view of the parts we work on", hy: "Մեր սպասարկած հանգույցների մասնատված տեսքը" },
+      xpHint: { en: "Point at a part, or tap it, to see the job.", hy: "Մատնանշեք կամ հպեք հանգույցին՝ աշխատանքը տեսնելու համար։" }
     }
   };
 
@@ -125,7 +128,39 @@
     for (var j = 0; j < btns.length; j++) {
       btns[j].setAttribute("aria-pressed", btns[j].getAttribute("data-lang") === lang ? "true" : "false");
     }
+    renderXp();
   }
+
+  // ---- Exploded parts diagram: hover / tap / keyboard highlights a part and names its service ----
+  var xp = document.getElementById("xp");
+  var xpParts = xp ? xp.querySelectorAll(".part") : [];
+  var xpName = document.getElementById("xp-name");
+  var xpDesc = document.getElementById("xp-desc");
+  var xpCur = -1;
+
+  function renderXp() {
+    if (!xp || !xpName) return;
+    var lang = document.documentElement.lang === "hy" ? "hy" : "en";
+    for (var i = 0; i < xpParts.length; i++) {
+      var idx = +xpParts[i].getAttribute("data-part");
+      var on = idx === xpCur;
+      xpParts[i].classList.toggle("is-on", on);
+      xpParts[i].setAttribute("aria-pressed", on ? "true" : "false");
+      xpParts[i].setAttribute("aria-label", T.services[idx].name[lang]);
+    }
+    xp.classList.toggle("has-on", xpCur >= 0);
+    var read = xpName.parentNode;
+    if (xpCur < 0) {
+      xpName.textContent = T.ui.xpHint[lang];
+      xpDesc.textContent = "";
+      read.classList.add("is-hint");
+    } else {
+      xpName.textContent = T.services[xpCur].name[lang];
+      xpDesc.textContent = T.services[xpCur].desc[lang];
+      read.classList.remove("is-hint");
+    }
+  }
+  function xpShow(i) { if (i !== xpCur) { xpCur = i; renderXp(); } }
 
   var saved = null;
   try { saved = window.localStorage.getItem(KEY); } catch (e) { saved = null; }
@@ -159,6 +194,52 @@
     });
     document.addEventListener("click", function (e) { if (bar && !bar.contains(e.target)) setMenu(false); });
     window.addEventListener("resize", function () { if (window.innerWidth > 1020) setMenu(false); });
+  }
+
+  if (xp) {
+    var lastPointer = "mouse";
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+    Array.prototype.forEach.call(xpParts, function (p) {
+      var idx = +p.getAttribute("data-part");
+      var wasOn = false;
+      p.addEventListener("pointerdown", function (e) { lastPointer = e.pointerType || "mouse"; wasOn = xpCur === idx; });
+      p.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") xpShow(idx); });
+      p.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse" && document.activeElement !== p) xpShow(-1); });
+      p.addEventListener("click", function () {
+        // touch / pen: tap toggles; mouse: click keeps it lit
+        if (lastPointer !== "mouse" && wasOn) { xpShow(-1); p.blur(); } else xpShow(idx);
+        lastPointer = "mouse"; wasOn = false;
+      });
+      p.addEventListener("focus", function () { xpShow(idx); });
+      p.addEventListener("blur", function () { if (xpCur === idx) xpShow(-1); });
+      p.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); xpShow(xpCur === idx ? -1 : idx); }
+        else if (e.key === "Escape") { xpShow(-1); p.blur(); }
+      });
+    });
+    document.addEventListener("click", function (e) { if (!e.target.closest || !e.target.closest("#xp .part")) xpShow(-1); });
+
+    // light parallax / tilt following the cursor (mouse only, never with reduced motion)
+    var svg = xp.querySelector(".xp__svg");
+    var raf = 0, mx = 0, my = 0;
+    function paint() {
+      raf = 0;
+      svg.style.setProperty("--rx", (mx * 5).toFixed(2) + "deg");
+      svg.style.setProperty("--ry", (-my * 5).toFixed(2) + "deg");
+      for (var i = 0; i < xpParts.length; i++) {
+        var d = +xpParts[i].getAttribute("data-d") || 10;
+        xpParts[i].style.setProperty("--px", (mx * d).toFixed(1) + "px");
+        xpParts[i].style.setProperty("--py", (my * d).toFixed(1) + "px");
+      }
+    }
+    xp.addEventListener("pointermove", function (e) {
+      if (e.pointerType !== "mouse" || (reduce && reduce.matches)) return;
+      var r = xp.getBoundingClientRect();
+      mx = ((e.clientX - r.left) / r.width - .5) * 2;
+      my = ((e.clientY - r.top) / r.height - .5) * 2;
+      if (!raf) raf = requestAnimationFrame(paint);
+    });
+    xp.addEventListener("pointerleave", function () { mx = 0; my = 0; if (!raf) raf = requestAnimationFrame(paint); });
   }
 
   var y = document.getElementById("year");

@@ -101,21 +101,48 @@
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z" fill="currentColor"/></svg>
               <span data-i18n="cta.call">Call +374 33 347345</span>
             </a>
-            <a class="btn btn--ghost js-route" href="https://www.google.com/maps/search/?api=1&amp;query=Mazmanyan%20Street%201%2F2%2C%20Yerevan" target="_blank" rel="noopener">
+            <a class="btn btn--ghost js-route" href="https://yandex.com/maps/?text=Mazmanyan%20Street%201%2F2%2C%20Yerevan" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2.5" fill="currentColor"/></svg>
               <span data-i18n="cta.directions">Get directions</span>
             </a>
           </div>
         </div>
 
-        <div class="ring">
-          <svg viewBox="0 0 400 400" class="ring__svg" aria-hidden="true" focusable="false">
-            <circle class="ring__ticks" cx="200" cy="200" r="188"/>
-            <circle class="ring__track" cx="200" cy="200" r="160"/>
-            <circle class="ring__charge" cx="200" cy="200" r="160" pathLength="100"/>
-            <g class="ring__spark-wrap"><circle class="ring__spark" cx="200" cy="40" r="9"/></g>
+        <div class="art">
+          <svg viewBox="0 0 460 540" class="art__svg" role="group" aria-label="Charging connector and battery module" data-i18n-aria="hero.artLabel" focusable="false">
+            <defs>
+              <linearGradient id="ng-cable" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A3D57"/><stop offset="1" stop-color="#13233A"/></linearGradient>
+            </defs>
+            <path class="cord" d="M230 330 C 230 366, 110 338, 110 376"/>
+            <path class="cord__shine" d="M230 330 C 230 366, 110 338, 110 376"/>
+            <path class="current" d="M230 330 C 230 366, 110 338, 110 376"/>
+            <g class="ring-layer">
+              <circle class="ring__ticks" cx="230" cy="175" r="158"/>
+              <circle class="ring__track" cx="230" cy="175" r="132"/>
+              <circle class="ring__charge" cx="230" cy="175" r="132" pathLength="100"/>
+              <g class="ring__spark-wrap"><circle class="ring__spark" cx="230" cy="43" r="8"/></g>
+              <rect class="boot" x="214" y="306" width="32" height="30" rx="9"/>
+              <path class="boot__grip" d="M221 316h18M221 324h18"/>
+              <g class="hit plug" tabindex="0" role="button" aria-pressed="false" data-charge aria-label="Connector: start charging" data-i18n-aria="hero.plugLabel">
+                <circle class="hit__pad" cx="230" cy="175" r="122"/>
+                <path class="plug__face" d="M193.3 90 H266.7 A62 62 0 1 1 193.3 90 Z"/>
+                <rect class="plug__face" x="176" y="212" width="108" height="50" rx="25"/>
+                <g class="pin"><circle class="pin__hole" cx="213" cy="108" r="11"/><circle class="pin__tip" cx="213" cy="108" r="5"/></g><g class="pin"><circle class="pin__hole" cx="247" cy="108" r="11"/><circle class="pin__tip" cx="247" cy="108" r="5"/></g><g class="pin"><circle class="pin__hole" cx="196" cy="135" r="15"/><circle class="pin__tip" cx="196" cy="135" r="9"/></g><g class="pin"><circle class="pin__hole" cx="230" cy="135" r="15"/><circle class="pin__tip" cx="230" cy="135" r="9"/></g><g class="pin"><circle class="pin__hole" cx="264" cy="135" r="15"/><circle class="pin__tip" cx="264" cy="135" r="9"/></g><g class="pin"><circle class="pin__hole" cx="210" cy="165" r="15"/><circle class="pin__tip" cx="210" cy="165" r="9"/></g><g class="pin"><circle class="pin__hole" cx="250" cy="165" r="15"/><circle class="pin__tip" cx="250" cy="165" r="9"/></g>
+                <g class="pin pin--dc"><circle class="pin__hole" cx="204" cy="237" r="17"/><circle class="pin__tip" cx="204" cy="237" r="10"/></g><g class="pin pin--dc"><circle class="pin__hole" cx="256" cy="237" r="17"/><circle class="pin__tip" cx="256" cy="237" r="10"/></g>
+              </g>
+            </g>
+            <g class="hit pack" tabindex="0" role="button" aria-pressed="false" data-charge aria-label="Battery module: charge the cells" data-i18n-aria="hero.packLabel">
+              <rect class="pack__port" x="94" y="372" width="32" height="18" rx="5"/>
+              <rect class="pack__term" x="352" y="376" width="18" height="14" rx="3"/>
+              <rect class="pack__term pack__term--neg" x="386" y="376" width="18" height="14" rx="3"/>
+              <rect class="pack__case" x="40" y="388" width="380" height="132" rx="18"/>
+              <path class="pack__rib" d="M58 404 H402"/>
+              <rect class="bar" x="72" y="430" width="12" height="48" rx="6" style="--i:0"/><rect class="bar" x="110" y="430" width="12" height="48" rx="6" style="--i:2"/><rect class="bar" x="148" y="430" width="12" height="48" rx="6" style="--i:4"/><rect class="bar" x="186" y="430" width="12" height="48" rx="6" style="--i:6"/><rect class="bar" x="224" y="430" width="12" height="48" rx="6" style="--i:8"/><rect class="bar" x="262" y="430" width="12" height="48" rx="6" style="--i:10"/><rect class="bar" x="300" y="430" width="12" height="48" rx="6" style="--i:12"/><rect class="bar" x="338" y="430" width="12" height="48" rx="6" style="--i:14"/><rect class="bar" x="376" y="430" width="12" height="48" rx="6" style="--i:16"/>
+              <g class="cell" style="--i:0"><circle class="cell__can" cx="78" cy="430" r="15"/><circle class="cell__cap" cx="78" cy="430" r="9"/><circle class="cell__pos" cx="78" cy="430" r="3.5"/></g><g class="cell" style="--i:1"><circle class="cell__can" cx="78" cy="478" r="15"/><circle class="cell__cap" cx="78" cy="478" r="9"/><circle class="cell__pos" cx="78" cy="478" r="3.5"/></g><g class="cell" style="--i:2"><circle class="cell__can" cx="116" cy="430" r="15"/><circle class="cell__cap" cx="116" cy="430" r="9"/><circle class="cell__pos" cx="116" cy="430" r="3.5"/></g><g class="cell" style="--i:3"><circle class="cell__can" cx="116" cy="478" r="15"/><circle class="cell__cap" cx="116" cy="478" r="9"/><circle class="cell__pos" cx="116" cy="478" r="3.5"/></g><g class="cell" style="--i:4"><circle class="cell__can" cx="154" cy="430" r="15"/><circle class="cell__cap" cx="154" cy="430" r="9"/><circle class="cell__pos" cx="154" cy="430" r="3.5"/></g><g class="cell" style="--i:5"><circle class="cell__can" cx="154" cy="478" r="15"/><circle class="cell__cap" cx="154" cy="478" r="9"/><circle class="cell__pos" cx="154" cy="478" r="3.5"/></g><g class="cell" style="--i:6"><circle class="cell__can" cx="192" cy="430" r="15"/><circle class="cell__cap" cx="192" cy="430" r="9"/><circle class="cell__pos" cx="192" cy="430" r="3.5"/></g><g class="cell" style="--i:7"><circle class="cell__can" cx="192" cy="478" r="15"/><circle class="cell__cap" cx="192" cy="478" r="9"/><circle class="cell__pos" cx="192" cy="478" r="3.5"/></g><g class="cell" style="--i:8"><circle class="cell__can" cx="230" cy="430" r="15"/><circle class="cell__cap" cx="230" cy="430" r="9"/><circle class="cell__pos" cx="230" cy="430" r="3.5"/></g><g class="cell" style="--i:9"><circle class="cell__can" cx="230" cy="478" r="15"/><circle class="cell__cap" cx="230" cy="478" r="9"/><circle class="cell__pos" cx="230" cy="478" r="3.5"/></g><g class="cell" style="--i:10"><circle class="cell__can" cx="268" cy="430" r="15"/><circle class="cell__cap" cx="268" cy="430" r="9"/><circle class="cell__pos" cx="268" cy="430" r="3.5"/></g><g class="cell" style="--i:11"><circle class="cell__can" cx="268" cy="478" r="15"/><circle class="cell__cap" cx="268" cy="478" r="9"/><circle class="cell__pos" cx="268" cy="478" r="3.5"/></g><g class="cell" style="--i:12"><circle class="cell__can" cx="306" cy="430" r="15"/><circle class="cell__cap" cx="306" cy="430" r="9"/><circle class="cell__pos" cx="306" cy="430" r="3.5"/></g><g class="cell" style="--i:13"><circle class="cell__can" cx="306" cy="478" r="15"/><circle class="cell__cap" cx="306" cy="478" r="9"/><circle class="cell__pos" cx="306" cy="478" r="3.5"/></g><g class="cell" style="--i:14"><circle class="cell__can" cx="344" cy="430" r="15"/><circle class="cell__cap" cx="344" cy="430" r="9"/><circle class="cell__pos" cx="344" cy="430" r="3.5"/></g><g class="cell" style="--i:15"><circle class="cell__can" cx="344" cy="478" r="15"/><circle class="cell__cap" cx="344" cy="478" r="9"/><circle class="cell__pos" cx="344" cy="478" r="3.5"/></g><g class="cell" style="--i:16"><circle class="cell__can" cx="382" cy="430" r="15"/><circle class="cell__cap" cx="382" cy="430" r="9"/><circle class="cell__pos" cx="382" cy="430" r="3.5"/></g><g class="cell" style="--i:17"><circle class="cell__can" cx="382" cy="478" r="15"/><circle class="cell__cap" cx="382" cy="478" r="9"/><circle class="cell__pos" cx="382" cy="478" r="3.5"/></g>
+              <circle class="pack__led" cx="400" cy="504" r="5"/>
+            </g>
           </svg>
-          <p class="ring__center">
+          <p class="art__tag">
             <span class="ring__top" data-i18n="hero.ringTop">Open until</span>
             <span class="ring__time">19:00</span>
             <span class="ring__bottom" data-i18n="hero.ringBottom">Mazmanyan 1/2</span>
@@ -206,7 +233,7 @@
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z" fill="currentColor"/></svg>
               <span data-i18n="cta.call">Call +374 33 347345</span>
             </a>
-            <a class="btn btn--outline-light js-route" href="https://www.google.com/maps/search/?api=1&amp;query=Mazmanyan%20Street%201%2F2%2C%20Yerevan" target="_blank" rel="noopener">
+            <a class="btn btn--outline-light js-route" href="https://yandex.com/maps/?text=Mazmanyan%20Street%201%2F2%2C%20Yerevan" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2.5" fill="currentColor"/></svg>
               <span data-i18n="cta.directions">Get directions</span>
             </a>
@@ -236,6 +263,7 @@
       <p data-i18n="footer.tagline">Neo Garage. Electric vehicle service in Yerevan.</p>
       <p>&copy; <span class="js-year">2026</span> Neo Garage. <span data-i18n="footer.rights">All rights reserved.</span></p>
     </div>
+    <p class="wrap foot__demo" data-i18n="footer.demo">This is a demo website.</p>
   </footer>
 
   <!-- mobile action bar -->
@@ -244,7 +272,7 @@
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z" fill="currentColor"/></svg>
       <span data-i18n="bar.call">Call</span>
     </a>
-    <a class="dock__route js-route" href="https://www.google.com/maps/search/?api=1&amp;query=Mazmanyan%20Street%201%2F2%2C%20Yerevan" target="_blank" rel="noopener">
+    <a class="dock__route js-route" href="https://yandex.com/maps/?text=Mazmanyan%20Street%201%2F2%2C%20Yerevan" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2.5" fill="currentColor"/></svg>
       <span data-i18n="bar.route">Directions</span>
     </a>
