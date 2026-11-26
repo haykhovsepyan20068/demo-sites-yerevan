@@ -53,8 +53,8 @@ window.SITE = {
 
   /* ---- Контакты ---- */
   contacts: {
-    phone: "+37499926622",
-    phoneDisplay: "+374 99 926622",
+    phone: "+37477585892",
+    phoneDisplay: "+374 77 585892",
     email: "",
     address: { en: "Fuchik Street 32A, Yerevan", hy: "Ֆուչիկի փողոց 32A, Երևան" },
     mapQuery: "Xachi Garadzh Fuchik Street 32A Yerevan",
