@@ -39,6 +39,11 @@
       'aria.menu': 'Menu', 'aria.lang': 'Language', 'aria.nav': 'Main', 'aria.dock': 'Quick contact', 'aria.band': 'Membership',
       'aria.scene': 'Shark Gym: barbell, dumbbell and shark fin', 'aria.fin': 'Shark fin', 'aria.bar': 'Loaded barbell', 'aria.bell': 'Dumbbell',
       'footer.demo': 'This is a demo website.',
+      'footer.photos': 'Photos:', 'aria.gallery': 'Photos',
+      'alt.barbell': 'Loaded barbell with an orange weight plate on a gym floor',
+      'alt.iron': 'Two cast iron dumbbells on a concrete floor',
+      'alt.hex': 'Black hex dumbbell with a knurled steel handle',
+      'alt.hall': 'Empty gym hall with barbell racks and weight plates',
       'og.locale': 'en_US', 'og.alt': 'hy_AM'
     },
     hy: {
@@ -76,6 +81,11 @@
       'aria.menu': 'Ընտրացանկ', 'aria.lang': 'Լեզու', 'aria.nav': 'Հիմնական ընտրացանկ', 'aria.dock': 'Արագ կապ', 'aria.band': 'Աբոնեմենտ',
       'aria.scene': 'Շարք Ջիմ՝ ծանրաձող, հանտել և շնաձկան լողակ', 'aria.fin': 'Շնաձկան լողակ', 'aria.bar': 'Ծանրաձող՝ սկավառակներով', 'aria.bell': 'Հանտել',
       'footer.demo': 'Սա դեմո կայք է։',
+      'footer.photos': 'Լուսանկարներ՝', 'aria.gallery': 'Լուսանկարներ',
+      'alt.barbell': 'Ծանրաձող՝ նարնջագույն սկավառակով, մարզասրահի հատակին',
+      'alt.iron': 'Երկու թուջե հանտել բետոնե հատակին',
+      'alt.hex': 'Սև վեցանկյուն հանտել՝ պողպատե բռնակով',
+      'alt.hall': 'Դատարկ մարզասրահ՝ ծանրաձողերի կանգնակներով և սկավառակներով',
       'og.locale': 'hy_AM', 'og.alt': 'en_US'
     }
   };
@@ -103,6 +113,10 @@
     document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
       var v = d[el.getAttribute('data-i18n-aria')];
       if (v != null) el.setAttribute('aria-label', v);
+    });
+    document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
+      var v = d[el.getAttribute('data-i18n-alt')];
+      if (v != null) el.setAttribute('alt', v);
     });
     document.querySelectorAll('.lang button').forEach(function (b) {
       b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
@@ -166,6 +180,20 @@
     hero.addEventListener('pointerleave', function () {
       tx = ty = 0;
       if (!raf) raf = requestAnimationFrame(apply);
+    });
+  }
+
+  // Photo strip: frames wipe open when scrolled into view
+  var shots = document.querySelectorAll('.shot');
+  if ('IntersectionObserver' in window && shots.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.remove('pre'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -10% 0px' });
+    shots.forEach(function (s) {
+      var r = s.getBoundingClientRect();
+      if (r.top > window.innerHeight) { s.classList.add('pre'); io.observe(s); }
     });
   }
 

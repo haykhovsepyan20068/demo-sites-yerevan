@@ -288,6 +288,67 @@ html[lang="hy"] .btn { font-stretch: 85%; letter-spacing: 0; }
 .band__text { font-weight: 900; font-size: clamp(2rem, 5vw, 4.4rem); line-height: .9; max-width: 16ch; }
 html[lang="hy"] .band__text { max-width: 20ch; }
 
+/* Band over the gym hall photo, toned to petrol with an orange edge */
+.band {
+  position: relative; isolation: isolate; overflow: hidden;
+  background: var(--trench); color: var(--bone);
+  padding-block: clamp(64px, 9vw, 128px);
+  border-top: 4px solid var(--orange);
+}
+.band__photo {
+  position: absolute; inset: 0; z-index: -2;
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%;
+  filter: grayscale(.55) contrast(1.08) brightness(.9);
+}
+.band::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(11, 29, 40, .94) 0%, rgba(11, 29, 40, .72) 48%, rgba(16, 38, 51, .35) 100%),
+    linear-gradient(0deg, rgba(255, 91, 31, .18), rgba(255, 91, 31, 0) 45%);
+}
+.band .btn--dark { background: var(--orange); color: var(--trench); }
+.band .btn--dark:hover { background: var(--orange-hot); }
+
+/* Photo strip: duotone frames between Training and Why */
+.shots {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); grid-template-rows: auto auto;
+  gap: 6px; padding: 0 var(--gut); max-width: var(--max); margin: 0 auto;
+}
+.shot { position: relative; margin: 0; overflow: hidden; background: var(--trench); }
+.shot--tall { grid-row: 1 / span 2; }
+.shot--wide { aspect-ratio: 3 / 2; }
+.shot img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(.85) contrast(1.12) brightness(.92);
+  transform: scale(1.04);
+  transition: filter .5s ease, transform .9s cubic-bezier(.2, .7, .2, 1);
+}
+.shot--tall img { object-position: 50% 62%; }
+.shot::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(160deg, rgba(24, 54, 70, .55), rgba(11, 29, 40, .7));
+  mix-blend-mode: multiply; transition: opacity .5s ease;
+}
+.shot:hover img { filter: grayscale(0) contrast(1.05) brightness(1); transform: scale(1); }
+.shot:hover::after { opacity: .25; }
+.shot--tall img { filter: grayscale(.35) contrast(1.12) brightness(.92); }
+.shot__tag {
+  position: absolute; left: 0; bottom: 0; z-index: 1;
+  background: var(--orange); color: var(--trench);
+  font: 900 1.1rem/1 var(--display); font-stretch: 62%; padding: 8px 12px 7px;
+}
+.js .shot { clip-path: inset(0 0 0 0); }
+@media (prefers-reduced-motion: no-preference) {
+  .js .shot.pre { clip-path: inset(0 100% 0 0); }
+  .js .shot { transition: clip-path .9s cubic-bezier(.7, 0, .2, 1); }
+  .js .shot--wide:nth-of-type(2) { transition-delay: .12s; }
+  .js .shot--wide:nth-of-type(3) { transition-delay: .24s; }
+}
+
+.foot__credit { max-width: var(--max); margin: 8px auto 0; color: var(--steel); font-size: .8rem; }
+.foot__credit a { color: var(--steel); text-underline-offset: 3px; display: inline-block; padding: 4px 0; }
+.foot__credit a:hover { color: var(--orange); }
+
 /* Visit */
 .visit__grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
 .info { margin: 0; border-top: 3px solid var(--bone); }
@@ -369,6 +430,10 @@ html[lang="hy"] .band__text { max-width: 20ch; }
   .stat__fin { width: 80px; }
   .info__item { grid-template-columns: 1fr; gap: 4px; }
   .band .btn { width: 100%; }
+  .band::before { background: linear-gradient(180deg, rgba(11, 29, 40, .9), rgba(11, 29, 40, .7)), linear-gradient(0deg, rgba(255, 91, 31, .18), rgba(255, 91, 31, 0) 45%); }
+  .shots { grid-template-columns: 1fr 1fr; gap: 4px; }
+  .shot--tall { grid-row: auto; grid-column: 1 / -1; aspect-ratio: 4 / 3; }
+  .shot--wide { aspect-ratio: 1 / 1; }
 
   .dock {
     display: grid; grid-template-columns: 1.3fr 1fr;

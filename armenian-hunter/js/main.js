@@ -27,6 +27,7 @@
       ariaLang: { en: 'Language', hy: 'Լեզու' },
       ariaCallAhead: { en: 'Call ahead', hy: 'Զանգահարեք նախօրոք' },
       ariaDock: { en: 'Quick actions', hy: 'Արագ գործողություններ' },
+      ariaPhotos: { en: 'Photos', hy: 'Լուսանկարներ' },
       ariaScene: { en: 'Highland forest illustration', hy: 'Լեռնային անտառի պատկեր' },
       ariaMouflon: { en: 'Mouflon on the ridge', hy: 'Մուֆլոնը լեռնաշղթայի վրա' },
       ariaForest: { en: 'Fir forest', hy: 'Եղևնու անտառ' },
@@ -61,6 +62,9 @@
       var v = lookup(el.getAttribute('data-i18n-aria'));
       if (v && v[next]) el.setAttribute('aria-label', v[next]);
     });
+    document.querySelectorAll('img[data-alt-' + next + ']').forEach(function (im) {
+      im.setAttribute('alt', im.getAttribute('data-alt-' + next));
+    });
     document.querySelectorAll('.lang button').forEach(function (b) {
       b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === next));
     });
@@ -81,6 +85,15 @@
     var m = document.querySelector('meta[' + attr + '="' + key + '"]');
     if (m) m.setAttribute('content', val);
   }
+  /* field cards: reveal on scroll */
+  var fcards = document.querySelectorAll('.fcard');
+  if ('IntersectionObserver' in window) {
+    var fio = new IntersectionObserver(function (en) {
+      en.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); fio.unobserve(e.target); } });
+    }, { threshold: 0.2 });
+    fcards.forEach(function (f) { fio.observe(f); });
+  } else fcards.forEach(function (f) { f.classList.add('is-in'); });
+
   document.querySelectorAll('.lang button').forEach(function (b) {
     b.addEventListener('click', function () { applyLang(b.getAttribute('data-lang')); });
   });

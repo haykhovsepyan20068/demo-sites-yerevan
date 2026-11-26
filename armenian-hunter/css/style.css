@@ -390,3 +390,68 @@ html[lang="hy"] .closing__line { font-size: clamp(1.6rem, 3.6vw, 2.8rem); line-h
   .fir { animation: none !important; }
   .camo-band__track { animation: none; }
 }
+
+/* ---------- field cards (photos: Unsplash) ---------- */
+.fieldcards {
+  max-width: var(--max); margin: clamp(48px, 8vw, 100px) auto 0; padding: 0 var(--gutter);
+  display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: clamp(14px, 3vw, 40px); align-items: center;
+}
+.fcard {
+  position: relative; margin: 0; padding: 10px 10px 34px;
+  background: var(--sand-2); border-radius: 3px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .45), 0 0 0 1px rgba(23, 29, 19, .4);
+  opacity: 0; transform: translateY(40px) rotate(var(--rot, 0deg));
+  transition: opacity .8s ease, transform .8s cubic-bezier(.2, .8, .2, 1), box-shadow .3s;
+}
+.fcard--a { --rot: -3deg; }
+.fcard--b { --rot: 1.5deg; transition-delay: .12s; }
+.fcard--c { --rot: 3.5deg; transition-delay: .24s; }
+.fcard.is-in { opacity: 1; transform: translateY(0) rotate(var(--rot)); }
+.fcard.is-in:hover { transform: translateY(-6px) rotate(0deg) scale(1.02); box-shadow: 0 26px 50px rgba(0, 0, 0, .55), 0 0 0 1px rgba(23, 29, 19, .4); transition-delay: 0s; }
+.fcard img {
+  width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover;
+  filter: saturate(.78) sepia(.18) contrast(1.05); background: var(--olive);
+  border-radius: 2px; transition: filter .5s;
+}
+.fcard--b img { aspect-ratio: 3 / 4; object-position: 50% 78%; }
+.fcard:hover img { filter: saturate(.95) sepia(.05) contrast(1.05); }
+.fcard__tape {
+  position: absolute; top: -12px; left: 50%; z-index: 1; width: 92px; height: 26px; margin-left: -46px;
+  background: rgba(138, 148, 89, .78); transform: rotate(-4deg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .25);
+}
+.fcard__no {
+  position: absolute; left: 14px; bottom: 7px;
+  font: 800 1rem/1 "Big Shoulders Stencil Display", Impact, sans-serif; letter-spacing: .12em; color: var(--forest);
+}
+.fcard__no::after { content: ""; display: inline-block; width: 8px; height: 8px; margin-left: 8px; background: var(--blaze); vertical-align: middle; }
+
+/* ---------- closing photo backdrop ---------- */
+.closing { overflow: hidden; isolation: isolate; }
+.closing__photo { position: absolute; inset: 0; z-index: -1; }
+.closing__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; filter: grayscale(.35) contrast(1.05); }
+.closing__photo::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(60, 74, 40, .85) 0%, rgba(93, 101, 52, .75) 50%, rgba(23, 29, 19, .9) 100%);
+  mix-blend-mode: multiply;
+}
+.closing__photo::before {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(23, 29, 19, .6) 100%);
+}
+
+.foot__credit { margin: 0; text-align: center; padding: 0 var(--gutter) 16px; font-size: .75rem; color: rgba(220, 205, 166, .6); }
+.foot__credit a { color: var(--sand-2); }
+
+@media (max-width: 640px) {
+  .fieldcards { grid-template-columns: 1fr 1fr; gap: 18px 14px; }
+  .fcard { padding: 7px 7px 28px; }
+  .fcard--b { grid-column: 1 / -1; grid-row: 1; width: 78%; justify-self: center; }
+  .fcard--b img { aspect-ratio: 16 / 11; }
+  .fcard__no { font-size: .85rem; left: 10px; bottom: 6px; }
+  .foot__credit { padding-bottom: 96px; }
+  .foot__demo { padding-bottom: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fcard { opacity: 1; transform: rotate(var(--rot)); transition: none; }
+}
