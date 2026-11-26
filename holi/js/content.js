@@ -75,7 +75,7 @@ window.SITE = {
   social: {
     website:   "",
     facebook:  "https://facebook.com/HOLIMANKAKANHAGUST",
-    instagram: "https://instagram.com/holi_kids_",
+    instagram: "https://www.instagram.com/holi.kidsclothes/",
     tiktok:    ""
   },
 
