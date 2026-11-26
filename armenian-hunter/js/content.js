@@ -17,7 +17,7 @@ window.AH_CONTENT = {
     },
     "title": {
       "en": "Before the trail, there is the shop.",
-      "hy": "Մինչ արահետը՝ խանութը։"
+      "hy": "մինչև արահետը այնտեղ խանութ կար"
     },
     "subtitle": {
       "en": "Armenian Hunter is a hunting supplies store in Yerevan. Come in or call and ask what is available now.",
