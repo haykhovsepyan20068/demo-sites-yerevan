@@ -2,7 +2,7 @@
 window.NG_I18N = {
   en: {
     "meta.title": "Neo Garage | Electric Vehicle Service in Yerevan",
-    "meta.desc": "Neo Garage is a service point for electric vehicles on Mazmanyan Street, Yerevan. Repair, maintenance and software service. Call +374 98 107006.",
+    "meta.desc": "Neo Garage is a service point for electric vehicles on Mazmanyan Street, Yerevan. Repair, maintenance and software service. Call +374 77 148568.",
     "meta.ldDesc": "Electric vehicle repair, maintenance and software service in Yerevan.",
     "meta.locale": "en_US",
     "meta.localeAlt": "hy_AM",
@@ -17,7 +17,7 @@ window.NG_I18N = {
     "hero.subtitle": "Neo Garage in Yerevan is a service point for electric vehicles: repair, maintenance and software service. Call us and describe the issue.",
     "hero.ringTop": "Open until",
     "hero.ringBottom": "Mazmanyan 1/2",
-    "cta.call": "Call +374 98 107006",
+    "cta.call": "Call +374 77 148568",
     "cta.directions": "Get directions",
     "cta.instagram": "Follow on Instagram",
     "services.title": "What we do",
@@ -53,7 +53,7 @@ window.NG_I18N = {
   },
   hy: {
     "meta.title": "Neo Garage | Էլեկտրամեքենաների սպասարկում Երևանում",
-    "meta.desc": "Neo Garage-ը էլեկտրամեքենաների սպասարկման կետ է Երևանում՝ Մազմանյան փողոցում։ Վերանորոգում, սպասարկում և ծրագրային սպասարկում։ Զանգահարեք՝ +374 98 107006։",
+    "meta.desc": "Neo Garage-ը էլեկտրամեքենաների սպասարկման կետ է Երևանում՝ Մազմանյան փողոցում։ Վերանորոգում, սպասարկում և ծրագրային սպասարկում։ Զանգահարեք՝ +374 77 148568։",
     "meta.ldDesc": "Էլեկտրամեքենաների վերանորոգում, սպասարկում և ծրագրային սպասարկում Երևանում։",
     "meta.locale": "hy_AM",
     "meta.localeAlt": "en_US",
@@ -68,7 +68,7 @@ window.NG_I18N = {
     "hero.subtitle": "Երևանի Neo Garage-ը էլեկտրամեքենաների սպասարկման կետ է՝ վերանորոգում, սպասարկում և ծրագրային սպասարկում։ Զանգահարեք և նկարագրեք խնդիրը։",
     "hero.ringTop": "Բաց է մինչև",
     "hero.ringBottom": "Մազմանյան 1/2",
-    "cta.call": "Զանգահարել +374 98 107006",
+    "cta.call": "Զանգահարել +374 77 148568",
     "cta.directions": "Ինչպես հասնել",
     "cta.instagram": "Հետևել Instagram-ում",
     "services.title": "Ինչով ենք զբաղվում",
